@@ -28,5 +28,9 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+      # The deployment step asks for the artifact right after the upload and sometimes gets an
+      # empty list ("No artifacts named github-pages were found"); give the listing time.
+      - name: Wait for the artifact listing
+        run: sleep 20
       - id: deployment
         uses: actions/deploy-pages@v4
