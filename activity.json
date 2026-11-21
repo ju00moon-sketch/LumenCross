@@ -1,65 +1,40 @@
 {
- "generated_at": "2026-11-22T00:52:12+09:00",
+ "generated_at": "2026-11-22T01:30:55+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-22T00:52:10+09:00"
-  },
-  {
-   "name": "통합·배포",
-   "state": "대기",
-   "last_activity_at": "2026-11-21T18:02:01+09:00"
-  },
-  {
-   "name": "경기 코어·AI",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-22T00:52:10+09:00"
-  },
-  {
-   "name": "구단·대회·저장",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-22T00:52:10+09:00"
-  },
-  {
-   "name": "검증·내러티브 엔진",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-22T00:51:53+09:00"
+   "last_activity_at": "2026-11-22T01:30:55+09:00"
   },
   {
    "name": "아트",
    "state": "대기",
-   "last_activity_at": "2026-11-21T15:39:54+09:00"
+   "last_activity_at": "2026-11-22T01:18:53+09:00"
   },
   {
    "name": "UI/UX",
    "state": "대기",
-   "last_activity_at": "2026-11-22T00:20:36+09:00"
+   "last_activity_at": "2026-11-22T01:19:46+09:00"
   },
   {
    "name": "글 콘텐츠 검수",
    "state": "대기",
-   "last_activity_at": "2026-11-22T00:30:39+09:00"
+   "last_activity_at": "2026-11-22T01:19:46+09:00"
   },
   {
    "name": "현황 보고문",
    "state": "대기",
-   "last_activity_at": "2026-11-21T21:25:40+09:00"
-  },
-  {
-   "name": "UI 소스 작성",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-22T00:51:46+09:00"
+   "last_activity_at": "2026-11-22T01:19:47+09:00"
   },
   {
    "name": "레벨 디자인",
    "state": "대기",
-   "last_activity_at": "2026-11-22T00:22:25+09:00"
+   "last_activity_at": "2026-11-22T01:19:47+09:00"
   },
   {
    "name": "환경 배치",
    "state": "대기",
-   "last_activity_at": "2026-11-22T00:36:26+09:00"
+   "last_activity_at": "2026-11-22T01:22:39+09:00"
   }
  ]
 }
