@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>작업 현황 · LumenCross 작업 현황판</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+:root{
+  --bg:#eef0ee; --panel:#f9faf8; --ink:#1c2230; --ink-2:#4a5263; --ink-3:#5d6576;
+  --line:#d6dad4; --brass:#7a591b; --brass-soft:#e9dcc0;
+  --done:#236648; --done-bg:#dcefe5; --active:#2a5590; --active-bg:#dde7f5;
+  --wait:#535a66; --wait-bg:#e7e9ec; --decide:#9a3724; --decide-bg:#f6e0d9;
+  --review:#6c4391; --review-bg:#ebe1f3; --blocked:#8f2828; --blocked-bg:#f3dcdc;
+  --serif:"Gowun Batang","Nanum Myeongjo",serif;
+  --sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{ color-scheme:dark;
+    --bg:#141821; --panel:#1b2130; --ink:#e7e9ee; --ink-2:#b4bac7; --ink-3:#959cab;
+    --line:#2c3446; --brass:#d2ab5e; --brass-soft:#3a3223;
+    --done:#63c49a; --done-bg:#1d3a2f; --active:#8db2ea; --active-bg:#1e2d47;
+    --wait:#a9afba; --wait-bg:#262c38; --decide:#ee937c; --decide-bg:#43261f;
+    --review:#c2a0e4; --review-bg:#34274a; --blocked:#e88c8c; --blocked-bg:#44242a; }
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;margin:0;overflow-wrap:anywhere}
+a{color:inherit}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:grid;gap:28px}
+.wrap,.wrap>*,main>*{min-width:0}
+main{display:grid;gap:28px}
+header.top{display:grid;gap:10px}
+.eyebrow{font-size:12px;color:var(--ink-2);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.eyebrow .asof,.asof-inline{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,4.4vw,36px);line-height:1.25;margin:0}
+.goalline{font-size:14px;color:var(--ink-2);max-width:72ch;margin:0}
+h2{font-family:var(--serif);font-size:20px;margin:0 0 12px}
+h2 .count{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-2);margin-left:8px}
+.sub-h{font-family:var(--serif);font-size:16px;margin:16px 0 6px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap;line-height:1.7}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-done{color:var(--done);background:var(--done-bg)} .s-active{color:var(--active);background:var(--active-bg)}
+.s-wait{color:var(--wait);background:var(--wait-bg)} .s-decide{color:var(--decide);background:var(--decide-bg)}
+.s-review{color:var(--review);background:var(--review-bg)} .s-blocked{color:var(--blocked);background:var(--blocked-bg)}
+.s-hold{color:var(--ink-2);background:transparent;border:1px dashed var(--ink-3);padding:1px 8px}
+.tabs{display:flex;gap:6px;margin:8px 0 2px;flex-wrap:wrap}
+.tab{font-size:14px;padding:8px 14px;min-height:44px;border:1px solid var(--line);border-radius:6px;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center}
+.tab:hover{color:var(--ink);border-color:var(--ink-3)}
+.tab:focus-visible{outline-offset:3px}
+.tab.is-on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.readme{font-size:13px;color:var(--ink-2);margin:0 0 12px;max-width:80ch}
+.empty{font-size:14px;color:var(--ink-2);margin:0}
+.repo-line{font-size:14px;margin:0 0 14px;max-width:80ch}
+.repo-line b{margin-right:8px}
+.xpending{margin:0 0 16px;padding:10px 14px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.xpending .sub-h{margin:0 0 6px}
+.xpending ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14px}
+.chain{list-style:none;margin:0;padding:0}
+.chain li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13.5px;align-items:start}
+.chain li:first-child{border-top:0}
+.chain .n{font-family:var(--mono);color:var(--brass);font-size:12px;padding-top:2px}
+.chain .g{font-size:12px;color:var(--ink-2);white-space:nowrap;padding-top:2px}
+.chain small{display:block;color:var(--ink-2);font-size:12px}
+.work{columns:280px;column-gap:12px}
+.wk{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0;break-inside:avoid;margin:0 0 12px}
+.role-h{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.role-n{font-weight:700;font-size:14px;margin:0}
+.wk-sum{margin:0;font-size:13px;color:var(--ink-2)}
+ol.steps{list-style:none;margin:0;padding:0;display:grid}
+ol.steps li{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:10px;align-items:start;padding:7px 0;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:7px;border:2px solid var(--wait);background:transparent}
+.d-done{background:var(--done);border-color:var(--done)} .d-active{background:var(--active-bg);border-color:var(--active)}
+.d-decide{background:var(--decide-bg);border-color:var(--decide)} .d-hold{border-color:var(--ink-2);border-style:dashed}
+.step-t{font-size:14px;line-height:1.5}
+.step-t small{display:block;font-size:12px;color:var(--ink-2);line-height:1.45}
+.facts{margin:4px 0 0;padding-top:8px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:13px}
+.facts dt{color:var(--ink-2);font-weight:500;white-space:nowrap} .facts dd{margin:0}
+.wcat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.wcat-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 4px}
+.wgroup{margin:14px 0 0;font-size:13.5px;font-weight:700;line-height:1.5}
+.witem{display:grid;gap:5px;font-size:13px;padding:11px 0;border-top:1px solid var(--line);min-width:0}
+.witem:first-child{border-top:0}
+.witem>*{min-width:0}
+.witem .wt{font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;line-height:1.4;margin:0}
+.witem .wt>.chip{flex:0 0 auto}
+.witem .wt>.wt-title{min-width:0;flex:1 1 12em}
+[data-pane="open"] .witem:not(.is-read) .wt::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brass);flex:0 0 auto}
+.witem dl{margin:6px 0 0;display:grid;grid-template-columns:11em minmax(0,1fr);gap:8px 12px}
+.witem dt{color:var(--ink-2);font-weight:500}
+.witem dd{margin:0}
+.witem .asks{margin:0;padding-left:18px;display:grid;gap:3px}
+.witem .wans{margin:0;padding:6px 10px;border-left:3px solid var(--done);background:var(--done-bg);font-size:13px;line-height:1.55;border-radius:0 6px 6px 0}
+.witem .wans b{margin-right:6px}
+@media (max-width:480px){.witem dl{grid-template-columns:minmax(0,1fr);row-gap:3px}.witem dd{margin-bottom:8px}}
+.readbtn{font:inherit;font-size:12px;font-weight:500;min-height:32px;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+.witem .readbtn{margin-left:auto}
+.readbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.is-read .readbtn{color:var(--ink);border-color:var(--ink-3);background:var(--brass-soft)}
+.is-read .wt-title{font-weight:400}
+.unread-badge{font-family:var(--mono);font-size:12px;color:var(--ink-2);font-weight:400} .unread-badge.has{color:var(--brass)}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.tl li:first-child{border-top:0}
+.tl time{font-family:var(--mono);font-size:12px;color:var(--brass);padding-top:1px}
+.ctable{display:grid;gap:6px;margin-top:6px;min-width:0}
+.ctable-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+.ctable table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.5;word-break:keep-all}
+.ctable.is-wide table{min-width:900px}
+.ctable caption{text-align:left;padding:8px 10px;font-weight:700}
+.ctable th,.ctable td{padding:8px 10px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.ctable thead th{font-size:12px;font-weight:600;color:var(--ink-2)}
+.ctable tbody th{font-weight:600}
+.ctable td.val{font-family:var(--mono);font-size:12.5px}
+.ctable-note{margin:0;font-size:12px;color:var(--ink-2)}
+@media (max-width:999px){
+  .ctable-scroll{overflow:visible;border:0}
+  .ctable table,.ctable caption,.ctable tbody,.ctable tr,.ctable th,.ctable td{display:block}
+  .ctable.is-wide table{min-width:0}
+  .ctable caption{padding:0}
+  .ctable thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .ctable tr{border:1px solid var(--line);border-radius:8px;margin-top:8px;padding:6px 0}
+  .ctable th,.ctable td{border-top:0;padding:3px 12px}
+  .ctable td::before{content:attr(data-label);display:block;font-family:var(--sans);font-size:11px;color:var(--ink-2)}
+}
+footer{font-size:12px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:12px}
+@media (max-width:420px){ .tl li{grid-template-columns:84px minmax(0,1fr)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow"><span>LumenCross · e스포츠 구단 운영 게임</span><span class="asof">2026-11-21 12:55 KST 기준</span></div>
+    <h1>LumenCross 작업 현황판</h1>
+    <p class="goalline">문서 묶음 1.2-final-r2(78개 파일)와 별도로 받은 아트 가이드 증보5를 로컬 저장소에 반입하고, 10개 역할의 작업을 배정하기 시작했습니다. 현재 8개 역할이 첫 작업을 진행 중이고, 글 콘텐츠 검수 역할은 초안 보고를 마쳐 총괄 확인을 기다리고 있으며, 현황 보고문 역할은 원장 기준 배정 예정 상태입니다. 공통 계약 기초 코드의 단위 테스트 14개와 문서 참조 검사 4종은 통과했지만, 이는 기초 코드 컴파일과 문서 검산 단계이며 CMake·Unreal Engine 빌드, 실제 게임 실행, 경기 하네스(대량 자동 검증 도구), 시각 검수는 아직 진행하지 않았습니다. 1.2-final-r3 묶음 기준과 Unreal Engine 버전에 대한 선택은 아래 대표 결정 칸에 정리했습니다.</p>
+    <div class="legend" aria-label="상태 표시"><span class="chip s-active">진행</span><span class="chip s-wait">대기</span><span class="chip s-decide">확인 필요</span><span class="chip s-hold">보류</span><span class="chip s-done">완료</span></div>
+    <nav class="tabs" aria-label="현황판 페이지"><a class="tab is-on" href="index.html" aria-current="page">작업 현황</a><a class="tab" href="review.html">기획 검토</a><a class="tab" href="closed.html">완료·종결</a></nav>
+  </header>
+  <main class="wrap-main">
+<section class="box" id="baseline" aria-labelledby="baseline-h"><h2 id="baseline-h">기준선과 저장소 상태<span class="count">2026-11-21 12:55 KST 기준</span></h2><p class="repo-line"><b>저장소 상태</b>로컬 Git 저장소에 기준 문서 묶음 78개 파일(원본 압축 파일과 해시 78/78 일치, 빠졌던 참고 이미지 1개 복원 포함)과 아트 가이드 증보5를 반입했습니다. 소스 코드는 원격에 올리지 않고 로컬에서만 관리하며, 공통 계약 기초 코드와 단위 테스트, 통합 읽기본·파일 목록 생성기, 현황판 생성기가 들어가 있습니다. 위키와 검색 색인은 아직 구축하지 않았습니다.</p><div class="xpending"><h3 class="sub-h">아직 안 된 것</h3><ul><li>지시서 기준 1.2-final-r3 묶음과 아트 통합 보고서 수령 여부 확정(미수령 상태)</li><li>공통 코어의 독립 CMake 빌드와 Unreal Engine 빌드 도구(UBT) 동일 소스 컴파일 연결</li><li>Unreal Engine 프로젝트 구성, 에디터 빌드, 실제 게임 실행과 시각 검수</li><li>경기 시뮬레이션 본체 구현, 교차 컴파일러 상태 해시 비교, 경기 하네스(대량 자동 검증 도구)</li><li>외부 정식 게임 데이터 입고 4건(EXT 4건: 계약자·스킬·미러 시티 지형 원본 등, 계약자 볼트 무기군 배정 포함)</li><li>미결 기획 결정 15건(OD 15건)과 후속 검토·실험 8건(FR 8건)</li><li>UI 소스 작성 역할 개설(플러그인 뼈대와 UI 공용 키트 초안 준비 뒤 진행)</li><li>용어 이표기·동명 충돌 12건과 콜사인 발음 확인 7건의 결정 카드 정리(초안 보고됨, 총괄 확인 대기)</li><li>아트 파일럿 착수 전 외부 입력(미카엘·세이라 컨셉 입력, 유료 생성 도구 사용 승인)</li><li>현황판의 실제 웹 배포(Pages), 모바일 실기기 확인, 화면 낭독기 확인</li><li>위키와 검색 색인 구축</li></ul></div><div class="ctable"><div class="ctable-scroll" role="region" aria-label="기준 문서 버전" tabindex="0"><table><caption>기준 문서 버전</caption><thead><tr><th scope="col">항목</th><th scope="col">기준</th><th scope="col">비고</th></tr></thead><tbody><tr><th scope="row">패키지 배포</th><td class="val" data-label="기준">1.2-final-r2</td><td data-label="비고">지시서 기준은 1.2-final-r3이지만 실제로 받은 1.2-final-r2(78개 파일)를 기준으로 반입했습니다. r3 묶음과 아트 통합 보고서는 아직 받지 못했습니다.</td></tr><tr><th scope="row">기술 계약</th><td class="val" data-label="기준">1.2-final-r2</td><td data-label="비고">지시서와 일치합니다. 엔진 스키마 2, 상태 해시 2, 경기 설정·요약 전송 규격(Setup/Summary wire) 2, 난수 생성기(RNG) v1, Ruleset 코드 100 기준입니다.</td></tr><tr><th scope="row">아트 가이드</th><td class="val" data-label="기준">v0.2 · 증보5</td><td data-label="비고">패키지 안에는 증보4가 들어 있었고, 별도 압축 파일로 받은 증보5 두 파일(아트 가이드, 아트 갱신 보고서)을 반영했습니다. 기존 증보4는 보관 폴더에 남겨 두었습니다.</td></tr><tr><th scope="row">인게임 Ruleset</th><td class="val" data-label="기준">v0.1</td><td data-label="비고">지시서와 일치합니다.</td></tr></tbody></table></div></div><h3 class="sub-h">다음 단계</h3><ol class="chain"><li><span class="n">1</span><span>총괄이 경기 설정·요약 전송 규격(Setup/Summary wire)과 명령 접수 게이트 구현을 마치고 참조 바이트(기준 출력값)와 대조합니다.</span></li><li><span class="n">2</span><span>총괄이 안내 문서와 목차 등 소비 문서를 동기화하고 통합 읽기본과 파일 목록을 다시 생성합니다.</span></li><li><span class="n">3</span><span>현황 사이트를 처음 게시하고, 이후 각 역할의 보고가 들어올 때마다 갱신합니다.</span></li><li><span class="n">4</span><span>통합·배포의 CMake 빌드 구성이 반영되면 각 역할이 직접 컴파일에서 프리셋 빌드로 전환합니다.</span></li><li><span class="n">5</span><span>게임 디자인·설계의 결정 자료와 글 콘텐츠 검수의 용어·발음 정리가 준비되면 대표 결정 카드로 게시합니다.</span></li></ol></section>
+<section id="lanes" aria-labelledby="lanes-h"><h2 id="lanes-h">레인별 작업 현황<span class="count">레인 10개 · 열린 작업 10건</span></h2><p class="readme">레인 이름은 역할 이름입니다. 끝난 작업은 <a href="closed.html#done-tasks">완료·종결 탭</a>으로 옮깁니다.</p><div class="work"><article class="wk"><div class="role-h"><h3 class="role-n">총괄</h3><span class="chip s-active">진행</span></div><p class="wk-sum">요구사항과 우선순위 정리, 공통 계약 통합 보정, 역할 배정과 결과 취합을 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">인수 확인, 저장소 구성, 공통 계약 코드 작성, 배정과 취합<small>기초 코드 단위 테스트 14개를 두 컴파일러에서 통과했고, 경기 설정·요약 전송 규격과 명령 접수 게이트를 진행 중입니다.</small></span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>루트 문서, 정본 문서, 공통 계약 코드, 현황 원장과 보고 도구</dd><dt>완료 기준</dt><dd>공통 계약 코드가 두 컴파일러에서 통과하고 참조 벡터(기준 계산값)와 일치할 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">통합·배포</h3><span class="chip s-active">진행</span></div><p class="wk-sum">공통 코어와 Unreal Engine의 동일 소스 빌드 구성, 엔진 단일 통합, 빌드·인증·배포를 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">공통 코어 독립 CMake 빌드와 Unreal Engine 빌드 도구(UBT) 동일 소스 컴파일 연결<small>플러그인 뼈대와 UI 공용 키트 초안이 나오면 UI 소스 작성 역할을 엽니다.</small></span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>CMake 빌드 설정, 빌드 도구, Unreal Engine 프로젝트</dd><dt>선행 조건</dt><dd>공통 계약 기초 코드(반영됨)</dd><dt>완료 기준</dt><dd>MSVC·clang-cl 프리셋에서 빌드와 자동 테스트 실행기(CTest)가 통과하고, UBT 에디터 타깃 빌드 성공과 코어 소스 단일 컴파일 근거가 확보될 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">경기 코어·AI</h3><span class="chip s-active">진행</span></div><p class="wk-sum">경기 시간, 전투, 이동, 맵 기하, 중립 오브젝트, 시야, AI 규칙 구현을 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">주기 정산 참조 알고리즘과 맵 정수 기하 구현<small>기술 부록 02 §5.3과 03 §5 기준입니다.</small></span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>경기 시뮬레이션·전투·맵·중립·시야·AI 코어 모듈</dd><dt>선행 조건</dt><dd>공통 계약 기초 코드(반영됨) · CMake 빌드 구성(진행 중, 그 전에는 직접 컴파일)</dd><dt>완료 기준</dt><dd>두 컴파일러에서 통과하고 문서의 참조 검사 사례를 C++ 테스트로 옮겨 통과할 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">구단·대회·저장</h3><span class="chip s-active">진행</span></div><p class="wk-sum">월드, 일정, 결과 원장, 정산, 저장 파일, 리플레이 처리를 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">리플레이(.lrpl V2)와 저장 파일(.sav V2) 컨테이너 변환기(코덱) 구현<small>기술 부록 05 §7과 05 §5 기준입니다.</small></span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>월드·정산·저장·리플레이 코어 모듈</dd><dt>선행 조건</dt><dd>체크섬 기초 코드(반영됨) · 경기 설정·요약 전송 규격(총괄 진행 중)</dd><dt>완료 기준</dt><dd>두 컴파일러에서 통과하고 헤더 세대 변조(1에서 3으로 바뀐 오류) 거부 등 반례를 테스트로 옮겨 통과할 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">검증·내러티브 엔진</h3><span class="chip s-active">진행</span></div><p class="wk-sum">공용 테스트 틀, 참조 벡터 회귀 검증, 데이터 검사, 한국어 조사 포매터를 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">한국어 조사 포매터, 참조 벡터 회귀 다리, 로스터 데이터 검사 구현</span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>테스트 하네스 공용 틀, 참조 벡터 회귀, 내러티브 엔진, 데이터 검사 도구</dd><dt>선행 조건</dt><dd>공통 계약 코드 · 발음 메타데이터 초안</dd><dt>완료 기준</dt><dd>두 컴파일러에서 통과하고 기존 참조 검사 4종을 유지하며 로스터 검사 실행 결과를 확보할 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">아트</h3><span class="chip s-active">진행</span></div><p class="wk-sum">캐릭터와 환경 파일럿 제작, 아트 원본 관리와 검증 기록을 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">미카엘·세이라 캐릭터와 대표 환경 구간 파일럿의 계획과 준비<small>착수 전 필요한 컨셉 입력과 유료 생성 도구 승인 요청 목록을 함께 정리 중입니다.</small></span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>아트 원본 자료와 아트 문서</dd><dt>선행 조건</dt><dd>캐릭터 컨셉 입력 · 유료 생성 도구 사용 승인</dd><dt>완료 기준</dt><dd>파일럿 계획, 컨셉 브리프, 환경 구간 선정안, 승인 요청 목록을 제출할 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">게임 디자인·설계</h3><span class="chip s-active">진행</span></div><p class="wk-sum">미결 기획 결정(OD) 자료 작성, 정식 게임 데이터 카탈로그 입고, 신규 기획 토론을 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">OD-02·03·04·07 결정 자료와 EXT-01·02 입고 목록 작성</span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>기획 설계 문서, 정식 게임 데이터 카탈로그 값</dd><dt>완료 기준</dt><dd>결정 자료 4건(검토 7항목 포함)과 입고 목록 2건을 제출할 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">UI/UX</h3><span class="chip s-active">진행</span></div><p class="wk-sum">M1 화면 설계, 상태 정의, 문구 키 요청, 화면 검수를 맡습니다.</p><ol class="steps"><li><span class="dot d-active" aria-hidden="true"></span><span class="step-t">M1 세 화면의 화면 카드와 흐름 문서 작성</span><span class="chip s-active">진행</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>UI/UX 설계 문서</dd><dt>선행 조건</dt><dd>기술 부록 04의 화면 데이터 모델(ViewModel) 계약</dd><dt>완료 기준</dt><dd>화면 카드 3건, 흐름 문서, 계약 요청·문구 키 요청 목록을 제출할 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">글 콘텐츠 검수</h3><span class="chip s-decide">확인 필요</span></div><p class="wk-sum">용어집과 인게임 텍스트 원본 작성, 문구 검수를 맡습니다.</p><ol class="steps"><li><span class="dot d-decide" aria-hidden="true"></span><span class="step-t">용어집, 발음 메타데이터, 검수 기준표 초안 작성<small>첫 작업 보고를 마쳤으며 총괄 확인과 저장소 반영을 기다리고 있습니다. 용어 이표기·동명 충돌 12건과 발음 확인 7건도 함께 보고했습니다.</small></span><span class="chip s-decide">확인 필요</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>인게임 텍스트 원본, 용어집, 발음 메타데이터</dd><dt>선행 조건</dt><dd>로스터 CSV</dd><dt>완료 기준</dt><dd>세 파일에 61인 전원이 포함되고 총괄 확인과 반영이 끝날 때</dd></dl></article><article class="wk"><div class="role-h"><h3 class="role-n">현황 보고문</h3><span class="chip s-wait">대기</span></div><p class="wk-sum">현황 사이트의 공개 문장을 작성합니다.</p><ol class="steps"><li><span class="dot d-wait" aria-hidden="true"></span><span class="step-t">현황 사이트 공개 문장 작성<small>기준 시각 원장상 배정 예정 상태입니다.</small></span><span class="chip s-wait">대기</span></li></ol><dl class="facts"><dt>담당 범위</dt><dd>현황판 공개 콘텐츠</dd><dt>선행 조건</dt><dd>작업 현황 원장 · 현황판 생성기</dd><dt>완료 기준</dt><dd>현황판 생성기의 검사를 통과하고 총괄 사실 대조를 마칠 때</dd></dl></article></div></section>
+<section id="decisions" aria-labelledby="decisions-h"><h2 id="decisions-h">대표 결정<span class="count">열림 2건</span></h2><p class="readme">대표님께 드리는 미답변 질문은 이 칸에만 둡니다. 실제로 답을 받은 항목만 <a href="closed.html#closed-decisions">완료·종결 탭</a>으로 옮기며, 읽음 표시는 이 브라우저에만 남는 표시이고 답변이나 승인이 아닙니다.</p><div class="wcat" data-pane="open"><div class="wcat-tools"><span class="unread-badge"></span><button type="button" class="readbtn" data-act="readall">모두 읽음</button></div><div class="witem" id="d-D-001" data-id="d:D-001"><h3 class="wt"><span class="chip s-decide">결정 필요</span><span class="wt-title">받지 못한 1.2-final-r3 묶음</span><button type="button" class="readbtn" aria-pressed="false">읽음</button></h3><dl><dt>질문</dt><dd>지시서에 적힌 1.2-final-r3 묶음과 아트 통합 보고서를 받지 못했습니다. 그 묶음을 넣어 주시겠습니까, 아니면 지금 상태(1.2-final-r2에 아트 증보5를 반영한 상태)를 기준으로 확정할까요?</dd><dt>추천안과 이유</dt><dd>r3 묶음이 있으면 넣어 주시는 쪽을 추천합니다. 받으면 지금 저장소와 파일 단위로 대조해, 총괄이 직접 맞춘 문서 동기화에 빠진 변경이 없는지 확인할 수 있습니다. 묶음이 따로 없다면 지금 상태를 기준으로 확정합니다.</dd><dt>대안</dt><dd>지금 상태를 그대로 기준으로 확정합니다. 이 경우 문서 배포 표기는 r2로 두고, 아트만 증보5로 적습니다.</dd><dt>플레이 차이</dt><dd>없습니다. 문서 묶음의 판 관리 문제입니다.</dd><dt>구현·다른 설계 영향</dt><dd>기술 계약은 양쪽 모두 1.2-final-r2라서 코드 작업에는 영향이 없습니다. 아트 가이드 증보5는 이미 반영했습니다. r3에만 있는 문서 변경이 있다면 그 부분만 다시 맞춥니다.</dd><dt>결정 시점</dt><dd>급하지 않습니다. 아트 파일럿을 넓히기 전에 정하면 됩니다.</dd><dt>숫자 상태</dt><dd>해당 없음.</dd></dl></div><div class="witem" id="d-D-002" data-id="d:D-002"><h3 class="wt"><span class="chip s-decide">결정 필요</span><span class="wt-title">Unreal Engine 버전 (미결 결정 OD-01의 버전 부분)</span><button type="button" class="readbtn" aria-pressed="false">읽음</button></h3><dl><dt>질문</dt><dd>프로젝트의 Unreal Engine 버전을 5.8로 정할까요? 작업 PC에 설치된 판은 5.8.4입니다.</dd><dt>추천안과 이유</dt><dd>5.8로 정하는 것을 추천합니다. 작업 PC에 설치된 엔진이 이 판 하나이고, 통합·배포가 이 판으로 빌드 검증을 진행하고 있습니다. 다른 판을 고르면 설치와 재검증이 추가됩니다.</dd><dt>대안</dt><dd>다른 5.x 판을 새로 설치해 씁니다. 어떤 판이 더 나은지 비교한 근거는 아직 없습니다(미확인).</dd><dt>플레이 차이</dt><dd>없습니다. 경기 규칙과 결과는 엔진과 분리된 코어가 계산합니다.</dd><dt>구현·다른 설계 영향</dt><dd>UE 프로젝트 파일의 엔진 연결, 빌드 명령, 이후 반입할 에셋의 판이 이 선택을 따릅니다. 에셋은 만든 판보다 낮은 판에서 열 수 없으므로 에셋 반입이 시작된 뒤에는 판을 낮추기 어렵습니다. OD-01의 나머지 항목(축 방향, 맵 단위와 표시 단위의 배율)은 이 질문에 넣지 않았고 화면 통합 전에 따로 묻습니다.</dd><dt>결정 시점</dt><dd>지금 정하는 것을 권합니다. UE 프로젝트 뼈대가 만들어지는 중이고, 에셋 반입 전에 정해야 재작업이 없습니다.</dd><dt>숫자 상태</dt><dd>5.8.4는 설치를 확인한 값입니다. 표시 배율 후보(1.0, 0.75)는 미결이며 이번 질문의 대상이 아닙니다.</dd></dl></div></div></section>
+<section class="box" id="verification" aria-labelledby="verification-h"><h2 id="verification-h">검증 기록</h2><p class="readme">실행해서 확인한 것만 적습니다. 범위 칸에 적히지 않은 것은 확인하지 않은 것입니다.</p><div class="ctable"><div class="ctable-scroll" role="region" aria-label="실제로 실행한 검증" tabindex="0"><table><caption>실제로 실행한 검증</caption><thead><tr><th scope="col">확인한 것</th><th scope="col">결과</th><th scope="col">범위</th><th scope="col">날짜</th></tr></thead><tbody><tr><th scope="row">받은 문서 묶음(ZIP) 78개 파일과 저장소 파일의 해시(SHA-256) 대조</th><td class="val" data-label="결과">78/78 일치</td><td data-label="범위">확인함: 파일 바이트 동일성(빠졌던 참고 이미지 1개 복원 포함). 확인하지 않음: 문서 내용의 옳고 그름, 빌드·실행 검증.</td><td class="val" data-label="날짜">2026-11-21</td></tr><tr><th scope="row">문서 패키지의 Python 참조 검사 4종 재실행(문서 검산)</th><td class="val" data-label="결과">4종 모두 통과(checks_core 8그룹, checks_map 7그룹, checks_bridge_persistence 66그룹, check_document_declarations)</td><td data-label="범위">확인함: 문서 참조 알고리즘 검산과 C++ 선언 구문 검사(clang 기준). 확인하지 않음: 엔진 빌드, 런타임 테스트, Unreal Engine 실행, 경기 하네스.</td><td class="val" data-label="날짜">2026-11-21</td></tr><tr><th scope="row">공통 계약 기초 코드의 C++ 단위 테스트 14개 실행(강타입, 버전 상수, 핸들, 해시·체크섬, 난수 벡터, 식별자 발급, 바이트 읽기·쓰기)</th><td class="val" data-label="결과">두 C++ 컴파일러(clang, MSVC) 직접 컴파일 모두 14/14 통과</td><td data-label="범위">확인함: 기초 코드 컴파일과 단위 테스트 14개. 확인하지 않음: CMake·CTest·UBT 빌드(아직 없음), 교차 컴파일러 상태 해시 비교, Unreal Engine 실행.</td><td class="val" data-label="날짜">2026-11-21</td></tr><tr><th scope="row">통합 읽기본과 파일 목록 생성기의 재현 검증</th><td class="val" data-label="결과">r2 기준 입력으로 두 파일을 바이트까지 동일하게 재생성(875,039B, 15,952B), 단위 테스트 6/6 통과</td><td data-label="범위">확인함: 문서 생성기의 바이트 동일 재현과 단위 테스트 6개. 확인하지 않음: 문서 내용 자체의 게임 규칙 검증.</td><td class="val" data-label="날짜">2026-11-21</td></tr><tr><th scope="row">현황판 생성기 단위 테스트와 브라우저 화면 확인</th><td class="val" data-label="결과">단위 테스트 47/47 통과. 세 페이지를 실제 브라우저(390px·1280px, 밝은·어두운 화면)에서 열어 가로 넘침·콘솔 오류·실패 요청 각 0건</td><td data-label="범위">확인함: 생성기 동작, 형식·공개 안전 검사, 브라우저 화면 표시. 확인하지 않음: 실제 웹 배포(Pages), 모바일 실기기, 화면 낭독기.</td><td class="val" data-label="날짜">2026-11-21</td></tr></tbody></table></div></div><h3 class="sub-h">반례</h3><p class="empty">열린 반례는 없습니다.</p></section>
+<section class="box" id="changelog" aria-labelledby="changelog-h"><h2 id="changelog-h">변경 기록</h2><ul class="tl"><li><time datetime="2026-11-21">2026-11-21</time><span>문서 패키지 1.2-final-r2(78개 파일)를 로컬 저장소에 반입하고 원본 압축 파일과 해시(SHA-256) 78/78 일치를 확인했습니다. 빠졌던 참고 이미지 1개도 원본에서 복원했습니다.</span></li><li><time datetime="2026-11-21">2026-11-21</time><span>별도로 받은 아트 가이드 증보5 두 파일(아트 가이드, 아트 갱신 보고서)을 반영하고 기존 증보4는 보관 폴더에 남겼습니다.</span></li><li><time datetime="2026-11-21">2026-11-21</time><span>10개 역할의 쓰기 소유 경로와 협업 운영 기준을 정리하고 첫 작업을 배정했습니다. 글 콘텐츠 검수 역할은 용어집·발음 메타데이터·검수 기준표 초안 보고를 마쳤습니다.</span></li><li><time datetime="2026-11-21">2026-11-21</time><span>문서 패키지의 Python 참조 검사 4종을 다시 실행해 모두 통과를 확인했습니다(문서 참조 알고리즘 검산 범위).</span></li><li><time datetime="2026-11-21">2026-11-21</time><span>공통 계약 기초 코드와 C++ 단위 테스트 14개를 작성해 두 컴파일러(clang, MSVC) 직접 컴파일에서 모두 14/14 통과를 확인했습니다.</span></li><li><time datetime="2026-11-21">2026-11-21</time><span>통합 읽기본·파일 목록 생성기를 만들어 r2 기준 바이트 일치 재현과 단위 테스트 6/6을 통과했고, 기술 부록 01의 일본어 혼입 표기(DOC-01)를 한국어로 정정했습니다.</span></li><li><time datetime="2026-11-21">2026-11-21</time><span>현황판 생성기를 만들어 단위 테스트 47/47과 브라우저 화면 확인(390px·1280px, 밝은·어두운 화면)을 통과했습니다.</span></li></ul></section>
+  </main>
+  <footer>이 현황판은 손으로 고른 공개용 요약 한 파일에서 생성합니다. 실행으로 확인한 것만 검증 기록에 적고, 대표가 실제로 답한 항목만 완료·종결로 옮깁니다.</footer>
+</div>
+<script>
+(function(){
+  var KEY='lcx-read-v1';
+  var read={}; try{ var saved=JSON.parse(localStorage.getItem(KEY)||'{}'); if(saved && typeof saved==='object' && !Array.isArray(saved)) read=saved; }catch(e){}
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(read)); }catch(e){} }
+  function isRead(id){ var v=Object.prototype.hasOwnProperty.call(read, id)?read[id]:undefined; return v===true || (typeof v==='number' && v>0); }
+  function apply(el){ var on=isRead(el.getAttribute('data-id')); el.classList.toggle('is-read', on);
+    var b=el.querySelector('.readbtn'); if(b){ b.setAttribute('aria-pressed', on?'true':'false'); b.textContent=on?'읽음 취소':'읽음'; } }
+  function badge(){ document.querySelectorAll('[data-pane="open"]').forEach(function(box){ var n=0;
+    box.querySelectorAll('[data-id]').forEach(function(el){ if(!isRead(el.getAttribute('data-id'))) n++; });
+    var s=box.querySelector('.unread-badge'); if(s){ s.textContent=n?('안 읽음 '+n):'모두 읽음'; s.classList.toggle('has', n>0); } }); }
+  document.querySelectorAll('[data-id]').forEach(apply);
+  document.addEventListener('click', function(ev){
+    var b=ev.target.closest('.readbtn[aria-pressed]'); if(b){ var el=b.closest('[data-id]'); var id=el.getAttribute('data-id'); if(isRead(id)) delete read[id]; else read[id]=Date.now(); save(); apply(el); badge(); return; }
+    var a=ev.target.closest('[data-act="readall"]'); if(a){ a.closest('[data-pane="open"]').querySelectorAll('[data-id]').forEach(function(el){ read[el.getAttribute('data-id')]=Date.now(); apply(el); }); save(); badge(); }
+  });
+  badge();
+})();
+</script>
+</body>
+</html>
