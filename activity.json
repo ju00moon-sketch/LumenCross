@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-22T03:48:56+09:00",
+ "generated_at": "2026-11-22T03:51:56+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-22T03:48:55+09:00"
+   "last_activity_at": "2026-11-22T03:51:56+09:00"
   },
   {
    "name": "경기 코어·AI",
    "state": "작업 중",
-   "last_activity_at": "2026-11-22T03:46:44+09:00"
+   "last_activity_at": "2026-11-22T03:51:55+09:00"
   },
   {
    "name": "구단·대회·저장",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-22T03:47:33+09:00"
+   "state": "대기",
+   "last_activity_at": "2026-11-22T03:50:42+09:00"
   },
   {
    "name": "검증·내러티브 엔진",
    "state": "작업 중",
-   "last_activity_at": "2026-11-22T03:47:35+09:00"
+   "last_activity_at": "2026-11-22T03:51:45+09:00"
   },
   {
    "name": "아트",
@@ -44,17 +44,17 @@
   {
    "name": "UI 소스 작성",
    "state": "작업 중",
-   "last_activity_at": "2026-11-22T03:48:34+09:00"
+   "last_activity_at": "2026-11-22T03:51:49+09:00"
   },
   {
    "name": "레벨 디자인",
    "state": "작업 중",
-   "last_activity_at": "2026-11-22T03:48:53+09:00"
+   "last_activity_at": "2026-11-22T03:51:27+09:00"
   },
   {
    "name": "환경 배치",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-22T03:48:54+09:00"
+   "state": "대기",
+   "last_activity_at": "2026-11-22T03:49:12+09:00"
   }
  ]
 }
