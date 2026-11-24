@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아트 · LumenCross 작업 현황판</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+:root{
+  --bg:#eef0ee; --panel:#f9faf8; --ink:#1c2230; --ink-2:#4a5263; --ink-3:#5d6576;
+  --line:#d6dad4; --brass:#7a591b; --brass-soft:#e9dcc0;
+  --done:#236648; --done-bg:#dcefe5; --active:#2a5590; --active-bg:#dde7f5;
+  --wait:#535a66; --wait-bg:#e7e9ec; --decide:#9a3724; --decide-bg:#f6e0d9;
+  --review:#6c4391; --review-bg:#ebe1f3; --blocked:#8f2828; --blocked-bg:#f3dcdc;
+  --serif:"Gowun Batang","Nanum Myeongjo",serif;
+  --sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{ color-scheme:dark;
+    --bg:#141821; --panel:#1b2130; --ink:#e7e9ee; --ink-2:#b4bac7; --ink-3:#959cab;
+    --line:#2c3446; --brass:#d2ab5e; --brass-soft:#3a3223;
+    --done:#63c49a; --done-bg:#1d3a2f; --active:#8db2ea; --active-bg:#1e2d47;
+    --wait:#a9afba; --wait-bg:#262c38; --decide:#ee937c; --decide-bg:#43261f;
+    --review:#c2a0e4; --review-bg:#34274a; --blocked:#e88c8c; --blocked-bg:#44242a; }
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;margin:0;overflow-wrap:anywhere}
+a{color:inherit}
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:grid;gap:28px}
+.wrap,.wrap>*,main>*{min-width:0}
+main{display:grid;gap:28px}
+header.top{display:grid;gap:10px}
+.eyebrow{font-size:12px;color:var(--ink-2);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.eyebrow .asof,.asof-inline{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,4.4vw,36px);line-height:1.25;margin:0}
+.goalline{font-size:14px;color:var(--ink-2);max-width:72ch;margin:0}
+h2{font-family:var(--serif);font-size:20px;margin:0 0 12px}
+h2 .count{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-2);margin-left:8px}
+.sub-h{font-family:var(--serif);font-size:16px;margin:16px 0 6px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap;line-height:1.7}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-done{color:var(--done);background:var(--done-bg)} .s-active{color:var(--active);background:var(--active-bg)}
+.s-wait{color:var(--wait);background:var(--wait-bg)} .s-decide{color:var(--decide);background:var(--decide-bg)}
+.s-review{color:var(--review);background:var(--review-bg)} .s-blocked{color:var(--blocked);background:var(--blocked-bg)}
+.s-hold{color:var(--ink-2);background:transparent;border:1px dashed var(--ink-3);padding:1px 8px}
+.tabs{display:flex;gap:6px;margin:8px 0 2px;flex-wrap:wrap}
+.tab{font-size:14px;padding:8px 14px;min-height:44px;border:1px solid var(--line);border-radius:6px;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center}
+.tab:hover{color:var(--ink);border-color:var(--ink-3)}
+.tab:focus-visible{outline-offset:3px}
+.tab.is-on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.readme{font-size:13px;color:var(--ink-2);margin:0 0 12px;max-width:80ch}
+.empty{font-size:14px;color:var(--ink-2);margin:0}
+.repo-line{font-size:14px;margin:0 0 14px;max-width:80ch}
+.repo-line b{margin-right:8px}
+.xpending{margin:0 0 16px;padding:10px 14px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.xpending .sub-h{margin:0 0 6px}
+.xpending ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14px}
+.chain{list-style:none;margin:0;padding:0}
+.chain li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13.5px;align-items:start}
+.chain li:first-child{border-top:0}
+.chain .n{font-family:var(--mono);color:var(--brass);font-size:12px;padding-top:2px}
+.chain .g{font-size:12px;color:var(--ink-2);white-space:nowrap;padding-top:2px}
+.chain small{display:block;color:var(--ink-2);font-size:12px}
+.work{columns:280px;column-gap:12px}
+.wk{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0;break-inside:avoid;margin:0 0 12px}
+.role-h{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.role-n{font-weight:700;font-size:14px;margin:0}
+.wk-sum{margin:0;font-size:13px;color:var(--ink-2)}
+ol.steps{list-style:none;margin:0;padding:0;display:grid}
+ol.steps li{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:10px;align-items:start;padding:7px 0;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:7px;border:2px solid var(--wait);background:transparent}
+.d-done{background:var(--done);border-color:var(--done)} .d-active{background:var(--active-bg);border-color:var(--active)}
+.d-decide{background:var(--decide-bg);border-color:var(--decide)} .d-hold{border-color:var(--ink-2);border-style:dashed}
+.step-t{font-size:14px;line-height:1.5}
+.step-t small{display:block;font-size:12px;color:var(--ink-2);line-height:1.45}
+.facts{margin:4px 0 0;padding-top:8px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:13px}
+.facts dt{color:var(--ink-2);font-weight:500;white-space:nowrap} .facts dd{margin:0}
+.wcat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.wcat-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 4px}
+.wgroupbox{border-top:1px solid var(--line);margin-top:8px}
+.wgroupbox>summary.wgroup{margin:0;padding:10px 0;font-size:13.5px;font-weight:700;line-height:1.5;cursor:pointer}
+.wgroup-n{margin-left:8px;font-size:12.5px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.witem{display:grid;gap:5px;font-size:13px;padding:11px 0;border-top:1px solid var(--line);min-width:0}
+.witem:first-child{border-top:0}
+.witem>*{min-width:0}
+.witem .wt{font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;line-height:1.4;margin:0}
+.witem .wt>.chip{flex:0 0 auto}
+.witem .wt>.wt-title{min-width:0;flex:1 1 12em}
+[data-pane="open"] .witem:not(.is-read) .wt::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brass);flex:0 0 auto}
+.witem dl{margin:6px 0 0;display:grid;grid-template-columns:11em minmax(0,1fr);gap:8px 12px}
+.witem dt{color:var(--ink-2);font-weight:500}
+.witem dd{margin:0}
+.witem .asks{margin:0;padding-left:18px;display:grid;gap:3px}
+.witem .wans{margin:0;padding:6px 10px;border-left:3px solid var(--done);background:var(--done-bg);font-size:13px;line-height:1.55;border-radius:0 6px 6px 0}
+.witem .wans b{margin-right:6px}
+@media (max-width:480px){.witem dl{grid-template-columns:minmax(0,1fr);row-gap:3px}.witem dd{margin-bottom:8px}}
+.readbtn{font:inherit;font-size:12px;font-weight:500;min-height:32px;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+.witem .readbtn{margin-left:auto}
+.readbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.is-read .readbtn{color:var(--ink);border-color:var(--ink-3);background:var(--brass-soft)}
+.is-read .wt-title{font-weight:400}
+.unread-badge{font-family:var(--mono);font-size:12px;color:var(--ink-2);font-weight:400} .unread-badge.has{color:var(--brass)}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.tl li:first-child{border-top:0}
+.tl time{font-family:var(--mono);font-size:12px;color:var(--brass);padding-top:1px}
+.ctable{display:grid;gap:6px;margin-top:6px;min-width:0}
+.ctable-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+.ctable table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.5;word-break:keep-all}
+.ctable.is-wide table{min-width:900px}
+.ctable caption{text-align:left;padding:8px 10px;font-weight:700}
+.ctable th,.ctable td{padding:8px 10px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.ctable thead th{font-size:12px;font-weight:600;color:var(--ink-2)}
+.ctable tbody th{font-weight:600}
+.ctable td.val{font-family:var(--mono);font-size:12.5px}
+.ctable-note{margin:0;font-size:12px;color:var(--ink-2)}
+@media (max-width:999px){
+  .ctable-scroll{overflow:visible;border:0}
+  .ctable table,.ctable caption,.ctable tbody,.ctable tr,.ctable th,.ctable td{display:block}
+  .ctable.is-wide table{min-width:0}
+  .ctable caption{padding:0}
+  .ctable thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .ctable tr{border:1px solid var(--line);border-radius:8px;margin-top:8px;padding:6px 0}
+  .ctable th,.ctable td{border-top:0;padding:3px 12px}
+  .ctable td::before{content:attr(data-label);display:block;font-family:var(--sans);font-size:11px;color:var(--ink-2)}
+}
+.shots{display:grid;gap:10px;margin-top:6px;justify-items:start}
+.shot{margin:0;display:grid;gap:4px;min-width:0;max-width:100%}
+.shot a{display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.shot img{display:block;max-width:100%;height:auto}
+.shot figcaption{font-size:12px;color:var(--ink-2)}
+.art-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.art-grid article{display:grid;align-content:start;gap:8px}
+.art-grid p,.art-grid h3,.art-grid .shots{margin:0}
+.motion-links{display:flex;flex-wrap:wrap;gap:4px 14px;list-style:none;padding:0;margin:0}
+.motion-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink)}
+.act{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.act li{border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:grid;gap:2px;align-content:start;min-width:0}
+.act-t{margin:0;font-size:12.5px;color:var(--ink-2)}
+.act-stale{margin:0 0 10px;font-size:13px;color:var(--decide)}
+footer{font-size:12px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:12px}
+@media (max-width:420px){ .tl li{grid-template-columns:84px minmax(0,1fr)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow"><span>LumenCross · e스포츠 구단 운영 게임</span></div>
+    <h1>아트 제작 현황</h1>
+    <p class="goalline">11월 24일 제작 기록입니다. 미러시티 정글 모델 여섯 종의 정면·측면·관전 각도와 외곽 경비견의 걷기·달리기를 공개합니다.</p>
+    
+    <nav class="tabs" aria-label="현황판 페이지"><a class="tab" href="index.html">작업 현황</a><a class="tab" href="review.html">기획 검토</a><a class="tab" href="closed.html">완료·종결</a><a class="tab is-on" href="art.html" aria-current="page">아트</a></nav>
+  </header>
+  <main class="wrap-main">
+<p class="readme"><a href="index.html">작업 현황</a> / 아트</p>
+<section class="box" id="art-report" aria-labelledby="art-report-h"><h2 id="art-report-h">아트 중간 보고</h2><ul><li>여섯 모델 모두 독립 검수를 받기 전입니다. 아직 게임 엔진에 배치하지 않았으며, 실제 경기 화면에서의 식별과 동작 재생도 확인하지 않았습니다.</li><li>오버클럭 코어, 이그니션 코어, 중장갑 골렘의 제작 원본은 각각 삼각형이 200만 개를 넘습니다. 게임에 그대로 넣는 최종 모델이 아닙니다.</li><li>외곽 경비견은 걷기와 달리기 각각 12개 자세에서 몸체가 움직이는 것을 확인했습니다. 그림자 무리 대형은 뼈대와 가중치가 있지만, 동작 서비스가 그 골격을 인식하지 못해 보행을 적용할 수 없었습니다. 같은 골격으로 달리기는 요청하지 않았습니다.</li></ul></section>
+<section id="art-gallery" aria-labelledby="art-gallery-h"><h2 id="art-gallery-h">제작 결과물</h2><div class="art-grid"><article class="box"><h3>오버클럭 코어</h3><div class="shots"><figure class="shot"><a href="assets/jungle-overclock.png"><img src="assets/jungle-overclock.png" alt="푸른빛이 비치는 가슴 양쪽에 두꺼운 장갑과 커다란 집게손이 달린 오버클럭 코어의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>정면에서는 양팔의 폭을, 옆에서는 앞으로 굽은 상체를 볼 수 있습니다.</p></article><article class="box"><h3>이그니션 코어</h3><div class="shots"><figure class="shot"><a href="assets/jungle-ignition.png"><img src="assets/jungle-ignition.png" alt="네 개의 굵은 다리가 납작한 주황빛 장갑 몸체를 받치는 이그니션 코어의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>수정한 네 방향 도면을 바탕으로 한 모델입니다.</p></article><article class="box"><h3>외곽 경비견</h3><div class="shots"><figure class="shot"><a href="assets/jungle-hound.png"><img src="assets/jungle-hound.png" alt="긴 주둥이와 위로 휜 꼬리, 관절이 드러난 네 다리를 가진 기계 경비견의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>걷기와 달리기를 같은 세 각도로 담았습니다. 발이 미끄러지는지, 움직일 때 장갑이 서로 겹치는지는 검수 전입니다.</p><ul class="motion-links"><li><a href="assets/jungle-hound-walk.webp" aria-label="외곽 경비견 걷기 동작 보기">걷기 동작 보기</a></li><li><a href="assets/jungle-hound-run.webp" aria-label="외곽 경비견 달리기 동작 보기">달리기 동작 보기</a></li></ul></article><article class="box"><h3>그림자 무리 대형</h3><div class="shots"><figure class="shot"><a href="assets/jungle-shadow.png"><img src="assets/jungle-shadow.png" alt="보라색 등가시가 솟고 긴 꼬리가 뒤로 뻗은 그림자 무리 대형이 네 다리를 낮춘 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>이번에 제작한 개체는 대형입니다. 소형 개체의 형태와 무리 구성은 정하지 않았습니다.</p></article><article class="box"><h3>칼날 드론군</h3><div class="shots"><figure class="shot"><a href="assets/jungle-blades.png"><img src="assets/jungle-blades.png" alt="원형 중심부 둘레에 굽은 칼날 세 개가 달린 드론의 정면, 측면, 관전 각도 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>옆에서 보면 몸체가 낮고, 관전 각도에서는 중앙부를 둘러싼 세 날개가 구분됩니다.</p></article><article class="box"><h3>중장갑 골렘</h3><div class="shots"><figure class="shot"><a href="assets/jungle-golem.png"><img src="assets/jungle-golem.png" alt="녹색 이끼가 낀 회색 바위 어깨와 긴 두 팔을 가진 중장갑 골렘의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>관전 각도에서도 어깨와 팔을 덮은 큰 바위 장갑을 볼 수 있습니다.</p></article></div></section>
+  </main>
+  <footer>이 현황판은 손으로 고른 공개용 요약 한 파일에서 생성합니다. 실행으로 확인한 것만 검증 기록에 적고, 대표가 실제로 답한 항목만 완료·종결로 옮깁니다.</footer>
+</div>
+</body>
+</html>
