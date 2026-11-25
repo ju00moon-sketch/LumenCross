@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아이템 백과 · LumenCross 작업 현황판</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+:root{
+  --bg:#eef0ee; --panel:#f9faf8; --ink:#1c2230; --ink-2:#4a5263; --ink-3:#5d6576;
+  --line:#d6dad4; --brass:#7a591b; --brass-soft:#e9dcc0;
+  --done:#236648; --done-bg:#dcefe5; --active:#2a5590; --active-bg:#dde7f5;
+  --wait:#535a66; --wait-bg:#e7e9ec; --decide:#9a3724; --decide-bg:#f6e0d9;
+  --review:#6c4391; --review-bg:#ebe1f3; --blocked:#8f2828; --blocked-bg:#f3dcdc;
+  --serif:"Gowun Batang","Nanum Myeongjo",serif;
+  --sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{ color-scheme:dark;
+    --bg:#141821; --panel:#1b2130; --ink:#e7e9ee; --ink-2:#b4bac7; --ink-3:#959cab;
+    --line:#2c3446; --brass:#d2ab5e; --brass-soft:#3a3223;
+    --done:#63c49a; --done-bg:#1d3a2f; --active:#8db2ea; --active-bg:#1e2d47;
+    --wait:#a9afba; --wait-bg:#262c38; --decide:#ee937c; --decide-bg:#43261f;
+    --review:#c2a0e4; --review-bg:#34274a; --blocked:#e88c8c; --blocked-bg:#44242a; }
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;margin:0;overflow-wrap:anywhere}
+a{color:inherit}
+a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:grid;gap:28px}
+.wrap,.wrap>*,main>*{min-width:0}
+main{display:grid;gap:28px}
+header.top{display:grid;gap:10px}
+.eyebrow{font-size:12px;color:var(--ink-2);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.eyebrow .asof,.asof-inline{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,4.4vw,36px);line-height:1.25;margin:0}
+.goalline{font-size:14px;color:var(--ink-2);max-width:72ch;margin:0}
+h2{font-family:var(--serif);font-size:20px;margin:0 0 12px}
+h2 .count{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-2);margin-left:8px}
+.sub-h{font-family:var(--serif);font-size:16px;margin:16px 0 6px}
+.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap;line-height:1.7}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-done{color:var(--done);background:var(--done-bg)} .s-active{color:var(--active);background:var(--active-bg)}
+.s-wait{color:var(--wait);background:var(--wait-bg)} .s-decide{color:var(--decide);background:var(--decide-bg)}
+.s-review{color:var(--review);background:var(--review-bg)} .s-blocked{color:var(--blocked);background:var(--blocked-bg)}
+.s-hold{color:var(--ink-2);background:transparent;border:1px dashed var(--ink-3);padding:1px 8px}
+.tabs{display:flex;gap:6px;margin:8px 0 2px;flex-wrap:wrap}
+.tab{font-size:14px;padding:8px 14px;min-height:44px;border:1px solid var(--line);border-radius:6px;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center}
+.tab:hover{color:var(--ink);border-color:var(--ink-3)}
+.tab:focus-visible{outline-offset:3px}
+.tab.is-on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.readme{font-size:13px;color:var(--ink-2);margin:0 0 12px;max-width:80ch}
+.empty{font-size:14px;color:var(--ink-2);margin:0}
+.repo-line{font-size:14px;margin:0 0 14px;max-width:80ch}
+.repo-line b{margin-right:8px}
+.xpending{margin:0 0 16px;padding:10px 14px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.xpending .sub-h{margin:0 0 6px}
+.xpending ul{margin:0;padding-left:18px;display:grid;gap:3px;font-size:14px}
+.chain{list-style:none;margin:0;padding:0}
+.chain li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13.5px;align-items:start}
+.chain li:first-child{border-top:0}
+.chain .n{font-family:var(--mono);color:var(--brass);font-size:12px;padding-top:2px}
+.chain .g{font-size:12px;color:var(--ink-2);white-space:nowrap;padding-top:2px}
+.chain small{display:block;color:var(--ink-2);font-size:12px}
+.work{columns:280px;column-gap:12px}
+.wk{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0;break-inside:avoid;margin:0 0 12px}
+.role-h{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.role-n{font-weight:700;font-size:14px;margin:0}
+.wk-sum{margin:0;font-size:13px;color:var(--ink-2)}
+ol.steps{list-style:none;margin:0;padding:0;display:grid}
+ol.steps li{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:10px;align-items:start;padding:7px 0;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+.dot{width:10px;height:10px;border-radius:50%;margin-top:7px;border:2px solid var(--wait);background:transparent}
+.d-done{background:var(--done);border-color:var(--done)} .d-active{background:var(--active-bg);border-color:var(--active)}
+.d-decide{background:var(--decide-bg);border-color:var(--decide)} .d-hold{border-color:var(--ink-2);border-style:dashed}
+.step-t{font-size:14px;line-height:1.5}
+.step-t small{display:block;font-size:12px;color:var(--ink-2);line-height:1.45}
+.facts{margin:4px 0 0;padding-top:8px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:13px}
+.facts dt{color:var(--ink-2);font-weight:500;white-space:nowrap} .facts dd{margin:0}
+.wcat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.wcat-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 4px}
+.wgroupbox{border-top:1px solid var(--line);margin-top:8px}
+.wgroupbox>summary.wgroup{margin:0;padding:10px 0;font-size:13.5px;font-weight:700;line-height:1.5;cursor:pointer}
+.wgroup-n{margin-left:8px;font-size:12.5px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.witem{display:grid;gap:5px;font-size:13px;padding:11px 0;border-top:1px solid var(--line);min-width:0}
+.witem:first-child{border-top:0}
+.witem>*{min-width:0}
+.witem .wt{font-weight:600;font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;line-height:1.4;margin:0}
+.witem .wt>.chip{flex:0 0 auto}
+.witem .wt>.wt-title{min-width:0;flex:1 1 12em}
+[data-pane="open"] .witem:not(.is-read) .wt::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brass);flex:0 0 auto}
+.witem dl{margin:6px 0 0;display:grid;grid-template-columns:11em minmax(0,1fr);gap:8px 12px}
+.witem dt{color:var(--ink-2);font-weight:500}
+.witem dd{margin:0}
+.witem .asks{margin:0;padding-left:18px;display:grid;gap:3px}
+.witem .wans{margin:0;padding:6px 10px;border-left:3px solid var(--done);background:var(--done-bg);font-size:13px;line-height:1.55;border-radius:0 6px 6px 0}
+.witem .wans b{margin-right:6px}
+@media (max-width:480px){.witem dl{grid-template-columns:minmax(0,1fr);row-gap:3px}.witem dd{margin-bottom:8px}}
+.readbtn{font:inherit;font-size:12px;font-weight:500;min-height:32px;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+.witem .readbtn{margin-left:auto}
+.readbtn:hover{color:var(--ink);border-color:var(--ink-3)}
+.is-read .readbtn{color:var(--ink);border-color:var(--ink-3);background:var(--brass-soft)}
+.is-read .wt-title{font-weight:400}
+.unread-badge{font-family:var(--mono);font-size:12px;color:var(--ink-2);font-weight:400} .unread-badge.has{color:var(--brass)}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
+.tl li:first-child{border-top:0}
+.tl time{font-family:var(--mono);font-size:12px;color:var(--brass);padding-top:1px}
+.ctable{display:grid;gap:6px;margin-top:6px;min-width:0}
+.ctable-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+.ctable table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.5;word-break:keep-all}
+.ctable.is-wide table{min-width:900px}
+.ctable caption{text-align:left;padding:8px 10px;font-weight:700}
+.ctable th,.ctable td{padding:8px 10px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+.ctable thead th{font-size:12px;font-weight:600;color:var(--ink-2)}
+.ctable tbody th{font-weight:600}
+.ctable td.val{font-family:var(--mono);font-size:12.5px}
+.ctable-note{margin:0;font-size:12px;color:var(--ink-2)}
+@media (max-width:999px){
+  .ctable-scroll{overflow:visible;border:0}
+  .ctable table,.ctable caption,.ctable tbody,.ctable tr,.ctable th,.ctable td{display:block}
+  .ctable.is-wide table{min-width:0}
+  .ctable caption{padding:0}
+  .ctable thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .ctable tr{border:1px solid var(--line);border-radius:8px;margin-top:8px;padding:6px 0}
+  .ctable th,.ctable td{border-top:0;padding:3px 12px}
+  .ctable td::before{content:attr(data-label);display:block;font-family:var(--sans);font-size:11px;color:var(--ink-2)}
+}
+.shots{display:grid;gap:10px;margin-top:6px;justify-items:start}
+.shot{margin:0;display:grid;gap:4px;min-width:0;max-width:100%}
+.shot a{display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.shot img{display:block;max-width:100%;height:auto}
+.shot figcaption{font-size:12px;color:var(--ink-2)}
+.capture-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));align-items:start;gap:24px}
+.capture-grid .shot{gap:10px}
+.capture-grid img{width:100%}
+.capture-grid figcaption{display:grid;gap:3px;font-size:14px;max-width:72ch}
+.capture-grid h3{font-family:var(--serif);font-size:18px;color:var(--ink);margin:0}
+.capture-grid time{font-family:var(--mono);font-size:12px;color:var(--brass)}
+.capture-grid p{margin:0}
+.art-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.art-grid article{display:grid;align-content:start;gap:8px}
+.art-grid p,.art-grid h3,.art-grid .shots{margin:0}
+.motion-links{display:flex;flex-wrap:wrap;gap:4px 14px;list-style:none;padding:0;margin:0}
+.motion-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink)}
+.cx-status{margin:0 0 4px;padding-left:18px;font-size:14px;display:grid;gap:3px;max-width:80ch}
+.cx-find{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 6px}
+.book-entry{padding:14px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.book-entry img{display:block;width:auto;max-width:min(100%,96px);height:auto;max-height:96px;object-fit:contain}
+.book-entry dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;margin:8px 0 0}
+.book-entry dt{color:var(--ink-2)}.book-entry dd{margin:0}
+.cx-find[hidden]{display:none}
+.cx-find label{font-size:13px;color:var(--ink-2)}
+.cx-find input{font:inherit;font-size:15px;min-height:44px;padding:6px 12px;border:1px solid var(--ink-3);border-radius:6px;background:var(--panel);color:var(--ink);width:min(100%,320px)}
+.cx-find input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.cx-count{font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+.cx-wrap{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:28px;align-items:start;margin-top:18px}
+.cx-index{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;font-size:13.5px;padding-right:6px}
+.cx-index h3{font-family:var(--serif);font-size:15px;margin:14px 0 4px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cx-index h3:first-child{margin-top:0}
+.cx-index h3 a{color:var(--ink)}
+.cx-index h3 span{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--ink-2)}
+.cx-index ul{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.cx-index li a{display:block;padding:5px 10px;color:var(--ink-2);text-decoration:none}
+.cx-mini{width:22px;height:22px;border-radius:4px;vertical-align:-6px;margin-right:6px}
+.cx-index li a:hover{color:var(--ink);text-decoration:underline}
+.cx-region{margin:0 0 36px}
+.cx-rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;border-bottom:2px solid var(--ink);padding-bottom:6px;margin:0 0 8px}
+.cx-rhead h2{font-family:var(--serif);font-size:24px;margin:0}
+.cx-en{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-2);margin-left:8px}
+.cx-rsum{font-size:14px;color:var(--ink-2);max-width:72ch;margin:0 0 14px}
+.cx-entry{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 12px;display:grid;gap:10px;min-width:0;scroll-margin-top:12px}
+.cx-entry h3{font-family:var(--serif);font-size:20px;margin:0}
+.cx-title{margin:2px 0 0;font-size:14px;color:var(--brass)}
+.cx-facts{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 12px;margin:0;font-size:13.5px}
+.cx-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.cx-id{display:grid;gap:8px;min-width:0}
+.cx-portrait{display:block;width:200px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.cx-portrait img{display:block;width:100%;height:auto}
+.cx-name{display:flex;align-items:center;gap:12px;min-width:0}
+.cx-icon{width:64px;height:64px;flex:none;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.cx-fams{display:grid;gap:20px;margin-top:12px}
+.cx-fam h3{font-family:var(--serif);font-size:16px;margin:0 0 2px}
+.cx-cls{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:0 28px}
+.cx-cls>li{border-top:1px solid var(--line);padding:10px 0;display:grid;gap:4px;align-content:start;min-width:0;scroll-margin-top:12px}
+.cx-cls-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.cx-cls h4{margin:0;font-size:15px}
+.cx-cls p{margin:0;font-size:13.5px;color:var(--ink-2);overflow-wrap:anywhere}
+.cx-cls p b{font-weight:600;color:var(--ink);margin-right:4px}
+.cx-new{font-size:12px;line-height:1.5;border:1px solid var(--brass);color:var(--brass);border-radius:4px;padding:0 6px}
+@media (max-width:560px){.cx-top{grid-template-columns:minmax(0,1fr)}.cx-portrait{width:min(100%,240px)}}
+.cx-facts dt{color:var(--ink-2)}
+.cx-facts dd{margin:0;overflow-wrap:anywhere}
+.cx-concept{margin:0;font-size:14.5px;max-width:72ch}
+.cx-skills{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.cx-skills>li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.cx-skills>li:last-child{border-bottom:0;padding-bottom:0}
+.cx-slot{font-family:var(--mono);font-size:14px;font-weight:700;width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--ink-3);border-radius:6px}
+.cx-skills h4{margin:0 0 2px;font-size:15px}
+.cx-skills p{margin:0;font-size:14px;color:var(--ink-2);max-width:72ch}
+.cx-num summary{cursor:pointer;font-size:13px;color:var(--ink-2);padding:10px 0}
+.cx-tbl{border-collapse:collapse;font-size:13px}
+.cx-tbl th,.cx-tbl td{text-align:left;padding:3px 14px 3px 0;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.cx-tbl th{font-weight:500;color:var(--ink-2)}
+.cx-tbl td.v{font-family:var(--mono)}
+.cx-entry[hidden],.cx-region[hidden],.cx-index li[hidden]{display:none}
+@media (max-width:999px){
+  .cx-wrap{grid-template-columns:minmax(0,1fr);gap:16px}
+  .cx-index{position:static;max-height:none;overflow:visible;display:flex;flex-wrap:wrap;gap:8px;padding:0}
+  .cx-index ul{display:none}
+  .cx-index h3{margin:0}
+  .cx-index h3 a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:6px;text-decoration:none}
+  .cx-index h3 span{display:none}
+}
+.act{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.act li{border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:grid;gap:2px;align-content:start;min-width:0}
+.act-t{margin:0;font-size:12.5px;color:var(--ink-2)}
+.act-stale{margin:0 0 10px;font-size:13px;color:var(--decide)}
+footer{font-size:12px;color:var(--ink-2);border-top:1px solid var(--line);padding-top:12px}
+@media (max-width:420px){ .tl li{grid-template-columns:84px minmax(0,1fr)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow"><span>LumenCross · e스포츠 구단 운영 게임</span><span class="asof">2026-11-26 기준</span></div>
+    <h1>아이템 백과</h1>
+    <p class="goalline">규칙서에서 이름과 용도를 확인한 전술 부츠 두 단계와 시야 도구 네 종입니다. 2티어 부츠는 개별 모델이 아니라 공통 단계입니다. 일반 조합 장비의 이름·가격·조합표는 아직 없으며, 아래 제작 목록의 수량은 출시 수량이 아닙니다. 아이콘 설명은 작화 제안이고 확정된 외형은 아닙니다.</p>
+    
+    <nav class="tabs" aria-label="현황판 페이지"><a class="tab" href="index.html">작업 현황</a><a class="tab" href="review.html">기획 검토</a><a class="tab" href="closed.html">완료·종결</a><a class="tab" href="contractors.html">계약자 도감</a><a class="tab is-on" href="items.html" aria-current="page">아이템 백과</a><a class="tab" href="art.html">아트</a><a class="tab" href="screenshots.html">게임 화면</a></nav>
+  </header>
+  <main class="wrap-main">
+<p class="readme"><a href="#item-icons">아이콘 제작 목록</a> · <a href="#item-gaps">남은 아이템 기획</a></p>
+<section class="box" id="book-entries" aria-labelledby="book-entries-h"><h2 id="book-entries-h">아이템 목록<span class="count">6개</span></h2><div class="cx-find" hidden><label for="book-query">아이템 이름, 분류, 효과로 찾기</label><input type="search" id="book-query" aria-controls="book-entries"><span id="book-result" role="status"></span></div><article class="book-entry" id="item-basic-tactical-boots" tabindex="-1" data-book-search="기본 전술 부츠 전술 부츠 이동속도 +25. 기본 이동속도 350이면 375가 된다."><h3><a href="#item-basic-tactical-boots">기본 전술 부츠</a></h3><dl><dt>분류</dt><dd>전술 부츠</dd><dt>기획 상태</dt><dd>규칙 명시</dd><dt>가격</dt><dd>300G. 전술 특성(가칭)으로 경기당 한 번 무료 지급하는 경로도 있으나 특성과 지급 시각은 미정.</dd><dt>효과</dt><dd>이동속도 +25. 기본 이동속도 350이면 375가 된다.</dd><dt>조합식</dt><dd>해당 없음. 2티어 전술 부츠를 만들 때 한 켤레를 쓴다.</dd><dt>근거</dt><dd>인게임 규칙 §2.1-A·2.2</dd></dl></article><article class="book-entry" id="item-tier-two-tactical-boots" tabindex="-1" data-book-search="2티어 전술 부츠 전술 부츠 이동속도 총 +45. 기본 이동속도 350이면 395다. 기본 부츠의 +25와 겹치지 않는다. 역할별 전투 보정의 종류와 수치는 미정."><h3><a href="#item-tier-two-tactical-boots">2티어 전술 부츠</a></h3><dl><dt>분류</dt><dd>전술 부츠</dd><dt>기획 상태</dt><dd>공통 규칙 · 종류 미정</dd><dt>가격</dt><dd>종류별 정가 미정. 정가는 300G 이상이어야 한다.</dd><dt>효과</dt><dd>이동속도 총 +45. 기본 이동속도 350이면 395다. 기본 부츠의 +25와 겹치지 않는다. 역할별 전투 보정의 종류와 수치는 미정.</dd><dt>조합식</dt><dd>기본 전술 부츠를 재료로 올린다. 종류별 추가 재료와 조합 비용은 미정.</dd><dt>근거</dt><dd>인게임 규칙 §2.1-A·2.2·12</dd></dl></article><article class="book-entry" id="item-vision-totem" tabindex="-1" data-book-search="일반 시야 토템 시야 도구 600유닛 안에 설치하면 반경 900유닛을 밝히고 1.5초 뒤 은신한다. 1충전으로 시작해 최대 2충전. 1~18레벨에서 충전은 180초에서 100초로 줄고 지속은 90초에서 120초로 늘어난다. 내구도 3타, 파괴 보상 10G."><h3><a href="#item-vision-totem">일반 시야 토템</a></h3><dl><dt>분류</dt><dd>시야 도구</dd><dt>기획 상태</dt><dd>시험 기준</dd><dt>가격</dt><dd>해당 없음 · 기본 시야 도구</dd><dt>효과</dt><dd>600유닛 안에 설치하면 반경 900유닛을 밝히고 1.5초 뒤 은신한다. 1충전으로 시작해 최대 2충전. 1~18레벨에서 충전은 180초에서 100초로 줄고 지속은 90초에서 120초로 늘어난다. 내구도 3타, 파괴 보상 10G.</dd><dt>조합식</dt><dd>해당 없음. 본진 우물에서 스캐너로 바꿀 수 있다.</dd><dt>근거</dt><dd>인게임 규칙 §2.1·11.1</dd></dl></article><article class="book-entry" id="item-scanner" tabindex="-1" data-book-search="스캐너 시야 도구 6초 동안 사용자를 따라다니며 반경 750유닛의 적 일반 은신 토템을 드러내고 시야를 차단한다. 제어 토템은 무력화하지 않는다. 1~18레벨에서 재사용 대기시간이 90초에서 60초로 줄어든다."><h3><a href="#item-scanner">스캐너</a></h3><dl><dt>분류</dt><dd>시야 도구</dd><dt>기획 상태</dt><dd>시험 기준</dd><dt>가격</dt><dd>해당 없음 · 본진 우물에서 도구 전환</dd><dt>효과</dt><dd>6초 동안 사용자를 따라다니며 반경 750유닛의 적 일반 은신 토템을 드러내고 시야를 차단한다. 제어 토템은 무력화하지 않는다. 1~18레벨에서 재사용 대기시간이 90초에서 60초로 줄어든다.</dd><dt>조합식</dt><dd>해당 없음. 일반 시야 토템과 교대하며, 지정 서포터는 시야석 1단계부터 함께 쓴다.</dd><dt>근거</dt><dd>인게임 규칙 §2.1·11.1</dd></dl></article><article class="book-entry" id="item-support-sightstone" tabindex="-1" data-book-search="서포터 전용 시야석 시야 도구 1단계는 우물에서 일반 토템 3충전을 채우고 스캐너를 함께 쓴다. 2단계는 4충전을 채운다. 동시에 설치하는 일반 토템은 어느 단계든 최대 3개다."><h3><a href="#item-support-sightstone">서포터 전용 시야석</a></h3><dl><dt>분류</dt><dd>시야 도구</dd><dt>기획 상태</dt><dd>시험 기준 · 해금 조건 재설계 중</dd><dt>가격</dt><dd>해당 없음 · 지정 서포터의 시야 도구가 진화</dd><dt>효과</dt><dd>1단계는 우물에서 일반 토템 3충전을 채우고 스캐너를 함께 쓴다. 2단계는 4충전을 채운다. 동시에 설치하는 일반 토템은 어느 단계든 최대 3개다.</dd><dt>조합식</dt><dd>조합하지 않는다. 시험 기준은 토큰 40회(320G)와 75회(600G)이며, 미달해도 각각 08:00과 14:00에 열린다. 이 금액은 구매가가 아니다.</dd><dt>근거</dt><dd>인게임 규칙 §2.4·11.1</dd></dl></article><article class="book-entry" id="item-control-totem" tabindex="-1" data-book-search="제어 토템 시야 도구 설치 후 계속 노출되며 파괴될 때까지 반경 900유닛의 적 일반 은신 토템을 드러내고 시야를 차단한다. 내구도 4타, 파괴 보상 30G. 한 사람당 1개 휴대·1개 설치가 기본이며 2단계 시야석 서포터만 2개까지 휴대한다."><h3><a href="#item-control-totem">제어 토템</a></h3><dl><dt>분류</dt><dd>시야 도구</dd><dt>기획 상태</dt><dd>시험 기준</dd><dt>가격</dt><dd>개당 75G · 본진 우물에서 구매</dd><dt>효과</dt><dd>설치 후 계속 노출되며 파괴될 때까지 반경 900유닛의 적 일반 은신 토템을 드러내고 시야를 차단한다. 내구도 4타, 파괴 보상 30G. 한 사람당 1개 휴대·1개 설치가 기본이며 2단계 시야석 서포터만 2개까지 휴대한다.</dd><dt>조합식</dt><dd>해당 없음. 재고가 있으면 수량에 관계없이 공용 가방 한 칸을 예약한다. 서포터 퀘스트 보상은 이 예약만 해제하고 재고는 남긴다.</dd><dt>근거</dt><dd>인게임 규칙 §2.1·11.1</dd></dl></article></section>
+<section class="box" id="item-icons" aria-labelledby="item-icons-h"><h2 id="item-icons-h">아이콘 제작 목록<span class="count">6개</span></h2><ul><li><a href="#item-basic-tactical-boots">기본 전술 부츠</a>: 발끝과 뒤꿈치가 보이는 부츠 한 짝의 옆모습. 기본형은 발목을 낮고 매끈하게 그린다.</li><li><a href="#item-tier-two-tactical-boots">2티어 전술 부츠</a>: 기본형과 같은 방향의 부츠에 높이 솟은 발목 덮개를 더한다. 종류별 표식은 종류가 정해진 뒤 나눈다.</li><li><a href="#item-vision-totem">일반 시야 토템</a>: 가느다란 말뚝 위에 외눈 렌즈 하나를 얹어, 바닥에 꽂아 두는 도구임이 보이게 한다.</li><li><a href="#item-scanner">스캐너</a>: 비스듬히 든 탐지기에서 부채꼴 탐지선이 퍼지는 모습. 토템의 수직 말뚝과 윤곽을 다르게 한다.</li><li><a href="#item-support-sightstone">서포터 전용 시야석</a>: 손에 쥘 만한 납작한 돌에 토템 렌즈 모양의 홈을 판다. 단계 표식은 돌의 외곽을 가리지 않게 둔다.</li><li><a href="#item-control-totem">제어 토템</a>: 중앙 렌즈 양옆에 굵은 두 갈래 지지대를 세운다. 색을 빼도 외눈 말뚝인 일반 토템과 구별되게 한다.</li></ul></section>
+<section class="box" id="item-gaps" aria-labelledby="item-gaps-h"><h2 id="item-gaps-h">남은 아이템 기획</h2><ul><li>하위 재료: 초안 목표 6~8종. 각 재료의 한국어 이름, 올리는 능력치와 수치, 낱개 가격, 아이콘 소재가 필요하다. 하위 재료 자체에는 조합 재료가 없다.</li><li>상위 재료: 초안 목표 10~12종. 중간 장비의 이름과 아이콘, 직계 하위·상위 재료의 이름과 개수, 정가·조합비, 완성 후 능력치와 고유 효과 유무가 필요하다.</li><li>전설 장비: 초안 목표 14~18종. 완성품 이름과 아이콘, 직계 하위·상위 재료 및 개수, 정가·조합비, 능력치, 고유 효과의 대상·발동 조건·수치·재사용 시간이 필요하다.</li><li>신화 장비: 초안 목표 4~6종. 완성품 이름과 아이콘, 소비할 전설의 이름과 나머지 직계 재료·개수, 정가·조합비, 능력치와 고유 효과가 필요하다. 재료 전설과 결과물을 외형에서도 구별해야 한다.</li><li>2티어 전술 부츠 종류: 종류별 이름·가격·조합 비용, 기본 부츠 외 추가 재료 유무, 역할별 전투 보정의 종류·수치, 개별 아이콘의 구분점이 필요하다. 기본 부츠 무료 지급 특성의 조건·시각도 미정이다.</li><li>추천 구매 순서: 완성품 이름이 정해지면 역할·계약자별로 목표 전설과 신화를 최대 여섯 개까지 순서대로 고른다. 신화의 재료인 전설은 신화보다 앞에 두거나 생략한다.</li></ul></section>
+<section class="box" id="book-rules" aria-labelledby="book-rules-h"><h2 id="book-rules-h">아이템 공통 규칙</h2><ul><li>하위·상위·전설·신화 장비의 첫 초안은 전체 약 34~40종을 목표로 한다. 등급별 수량도 설계안의 범위일 뿐, 실제 아이템 명단이 아니다. (조합 아이템 실행 설계 §3.3, 조합 아이템의 구현 세부 제11항)</li><li>시작 골드는 0G. 살아 있는 계약자만 아군 본진 우물 반경 850유닛 안에서 구매·조합·판매할 수 있다. 공용 가방은 6칸이다. 전술 부츠는 한 켤레만 들며, 원딜 퀘스트로 전용 칸을 열기 전까지 공용 한 칸을 쓴다. 원딜·서포터 퀘스트의 세부 달성 조건은 미정이다.</li><li>일반 조합 장비는 능력치와 지속·자동 발동 효과를 준다. 직계 재료는 최대 4개다. 전체 가격은 직계 재료값의 합과 조합 비용을 더한 값이다. 보유 재료를 쓰면 그 값은 다시 내지 않는다.</li><li>하위·상위는 같은 것을 여러 개 들 수 있다. 같은 전설은 중복 보유할 수 없다. 신화는 선수당 동시에 하나이며, 보유 중에는 조합에 든 전설을 다시 살 수 없다. 신화를 팔면 제한이 풀려 다른 신화도 만들 수 있다.</li><li>판매 환불액은 기준액의 70%로, 0.5G 이상은 올려 정수로 맞춘다. 다른 할인이 없으면 기준액은 정가다. 300G에 산 기본 부츠는 210G, 무료로 받은 것은 0G다. 무료 기본 부츠로 올린 2티어는 정가에서 300G를 뺀 금액이 기준이다. 완성품을 팔아도 재료는 돌아오지 않는다.</li><li>시야 도구 네 종은 팔 수 없다. 일반 토템·스캐너·시야석은 공용 가방을 쓰지 않는다. 전장에는 한 사람당 일반 토템 3개와 제어 토템 1개까지 둘 수 있다. 상한에서 새로 설치하면 같은 종류의 가장 오래된 자기 토템을 교체한다.</li></ul></section>
+  </main>
+  <footer>이 현황판은 손으로 고른 공개용 자료에서 생성합니다. 실행으로 확인한 것만 검증 기록에 적고, 대표의 답은 대표가 실제로 답한 항목에만 적습니다.</footer>
+</div>
+<script>
+
+const query = document.getElementById('book-query');
+const entries = Array.from(document.querySelectorAll('[data-book-search]'));
+const result = document.getElementById('book-result');
+function filterBook() {
+  const term = query.value.trim().normalize().toLowerCase();
+  let shown = 0;
+  for (const entry of entries) {
+    entry.hidden = !entry.dataset.bookSearch.normalize().toLowerCase().includes(term);
+    if (!entry.hidden) shown++;
+  }
+  result.textContent = shown ? shown + '개' : '검색 결과가 없습니다. 다른 검색어를 입력해 주세요.';
+}
+query.parentElement.hidden = false;
+query.addEventListener('input', filterBook);
+function revealEntry() {
+  const entry = document.getElementById(location.hash.slice(1));
+  if (entry && entry.hasAttribute('data-book-search') && entry.hidden) {
+    query.value = '';
+    filterBook();
+    entry.focus();
+  }
+}
+window.addEventListener('hashchange', revealEntry);
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href^="#item-"]');
+  if (link && document.getElementById(link.hash.slice(1))?.hidden) {
+    query.value = '';
+    filterBook();
+  }
+});
+filterBook();
+revealEntry();
+
+</script>
+</body>
+</html>

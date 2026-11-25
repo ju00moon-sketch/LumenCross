@@ -137,6 +137,13 @@ ol.steps li:first-child{border-top:0}
 .shot a{display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
 .shot img{display:block;max-width:100%;height:auto}
 .shot figcaption{font-size:12px;color:var(--ink-2)}
+.capture-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));align-items:start;gap:24px}
+.capture-grid .shot{gap:10px}
+.capture-grid img{width:100%}
+.capture-grid figcaption{display:grid;gap:3px;font-size:14px;max-width:72ch}
+.capture-grid h3{font-family:var(--serif);font-size:18px;color:var(--ink);margin:0}
+.capture-grid time{font-family:var(--mono);font-size:12px;color:var(--brass)}
+.capture-grid p{margin:0}
 .art-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
 .art-grid article{display:grid;align-content:start;gap:8px}
 .art-grid p,.art-grid h3,.art-grid .shots{margin:0}
@@ -144,6 +151,11 @@ ol.steps li:first-child{border-top:0}
 .motion-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink)}
 .cx-status{margin:0 0 4px;padding-left:18px;font-size:14px;display:grid;gap:3px;max-width:80ch}
 .cx-find{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 6px}
+.book-entry{padding:14px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.book-entry img{display:block;width:auto;max-width:min(100%,96px);height:auto;max-height:96px;object-fit:contain}
+.book-entry dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;margin:8px 0 0}
+.book-entry dt{color:var(--ink-2)}.book-entry dd{margin:0}
+.cx-find[hidden]{display:none}
 .cx-find label{font-size:13px;color:var(--ink-2)}
 .cx-find input{font:inherit;font-size:15px;min-height:44px;padding:6px 12px;border:1px solid var(--ink-3);border-radius:6px;background:var(--panel);color:var(--ink);width:min(100%,320px)}
 .cx-find input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
@@ -221,90 +233,124 @@ footer{font-size:12px;color:var(--ink-2);border-top:1px solid var(--line);paddin
     <h1>아트 제작 현황</h1>
     <p class="goalline">미러시티 양 팀의 억제기, 포탑, 코어를 골라 돌려 보세요. 아래에는 지형과 소품의 배치 검토 기록이 있습니다. 실제 경기장에 확정 배치한 모델은 아직 없습니다.</p>
     
-    <nav class="tabs" aria-label="현황판 페이지"><a class="tab" href="index.html">작업 현황</a><a class="tab" href="review.html">기획 검토</a><a class="tab" href="closed.html">완료·종결</a><a class="tab" href="contractors.html">계약자 도감</a><a class="tab is-on" href="art.html" aria-current="page">아트</a></nav>
+    <nav class="tabs" aria-label="현황판 페이지"><a class="tab" href="index.html">작업 현황</a><a class="tab" href="review.html">기획 검토</a><a class="tab" href="closed.html">완료·종결</a><a class="tab" href="contractors.html">계약자 도감</a><a class="tab" href="items.html">아이템 백과</a><a class="tab is-on" href="art.html" aria-current="page">아트</a><a class="tab" href="screenshots.html">게임 화면</a></nav>
   </header>
   <main class="wrap-main">
 <p class="readme"><a href="index.html">작업 현황</a> / 아트</p>
-<section class="box" id="team-structures" aria-labelledby="team-structures-h">
+<section class="box model-gallery" id="team-structures" aria-labelledby="model-gallery-h">
 <style>
-#team-structures .model-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,30%);gap:16px;align-items:start}
-#team-structures figure{margin:0;min-width:0}
-#team-structures .model-stage{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-#team-structures model-viewer{display:block;width:100%;height:clamp(300px,42vw,460px);touch-action:pan-y;--poster-color:var(--bg)}
-#team-structures model-viewer:focus-within{outline:2px solid var(--brass);outline-offset:-3px}
-#team-structures .model-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--bg);pointer-events:none}
-#team-structures figcaption{display:grid;gap:2px;margin-top:8px}
-#team-structures .model-status{font-size:13px;color:var(--ink-2)}
-#team-structures .model-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;padding:0;margin:0}
-#team-structures .model-list li{min-width:0}
-#team-structures button{display:grid;gap:4px;justify-items:center;width:100%;padding:5px 6px 7px;color:var(--ink);font:inherit;font-size:14px;line-height:1.45;background:var(--panel);border:1px solid var(--line);border-radius:6px}
-#team-structures button:enabled{cursor:pointer}
-#team-structures button:enabled:hover{border-color:var(--ink-3)}
-#team-structures button[aria-pressed=true]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass);font-weight:700}
-#team-structures button img{width:100%;height:72px;object-fit:contain}
-#team-structures .model-list a{display:block;text-align:center;padding:5px;font-size:13px;color:var(--ink-2);text-underline-offset:2px}
+.model-gallery{position:relative}
+.model-gallery .model-anchor{position:absolute;inset:0 auto auto 0}
+.model-gallery .model-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,30%);gap:16px;align-items:start}
+.model-gallery figure{margin:0;min-width:0}
+.model-gallery .model-stage{position:relative;height:clamp(300px,42vw,460px);background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.model-gallery model-viewer{display:block;width:100%;height:100%;touch-action:pan-y;--poster-color:var(--bg)}
+.model-gallery model-viewer:focus-within{outline:2px solid var(--brass);outline-offset:-3px}
+.model-gallery .model-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--bg);pointer-events:none}
+.model-gallery figcaption{display:grid;justify-items:start;gap:2px;margin-top:8px}
+.model-gallery .model-status{font-size:13px;color:var(--ink-2)}
+.model-gallery .model-groups{display:grid;gap:16px}
+.model-gallery .sub-h{margin:0 0 6px}
+.model-gallery .model-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;padding:0;margin:0}
+.model-gallery .model-list li{min-width:0}
+.model-gallery .model-list button{display:grid;gap:4px;justify-items:center;width:100%;padding:5px 6px 7px;color:var(--ink);font:inherit;font-size:14px;line-height:1.45;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.model-gallery button:enabled{cursor:pointer}
+.model-gallery button:enabled:hover{border-color:var(--ink-3)}
+.model-gallery button[aria-pressed=true]{border-color:var(--brass);box-shadow:inset 0 0 0 1px var(--brass);font-weight:700}
+.model-gallery button img{width:100%;height:72px;object-fit:contain}
 @media(max-width:760px){
-  #team-structures .model-layout{grid-template-columns:minmax(0,1fr)}
-  #team-structures .model-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,104px),1fr))}
+  .model-gallery .model-layout{grid-template-columns:minmax(0,1fr)}
+  .model-gallery .model-list{grid-template-columns:repeat(auto-fit,minmax(min(100%,104px),1fr))}
 }
 </style>
-<h2 id="team-structures-h">미러시티 진영 구조물<span class="count">3D 모델 6종</span></h2><div class="model-layout"><figure><div class="model-stage"><model-viewer id="structure-viewer" src="assets/blue-inhibitor.glb" poster="assets/blue-inhibitor.png" alt="블루 억제기 3D 모델" camera-controls touch-action="pan-y" loading="eager" interaction-prompt="none"></model-viewer><img class="model-cover" src="assets/blue-inhibitor.png" alt=""></div><figcaption><strong>블루 억제기</strong><span class="model-status" role="status"></span></figcaption><noscript>3D로 회전하려면 자바스크립트가 필요합니다. GLB 파일은 목록에서 내려받을 수 있습니다.</noscript></figure><ul class="model-list" aria-label="구조물 선택 및 내려받기"><li><button type="button" aria-controls="structure-viewer" aria-pressed="true" disabled><img src="assets/blue-inhibitor.png" alt=""><span>블루 억제기</span></button><a href="assets/blue-inhibitor.glb" download aria-label="블루 억제기 GLB 내려받기">GLB 내려받기</a></li><li><button type="button" aria-controls="structure-viewer" aria-pressed="false" disabled><img src="assets/red-inhibitor.png" alt=""><span>레드 억제기</span></button><a href="assets/red-inhibitor.glb" download aria-label="레드 억제기 GLB 내려받기">GLB 내려받기</a></li><li><button type="button" aria-controls="structure-viewer" aria-pressed="false" disabled><img src="assets/blue-tower.png" alt=""><span>블루 타워</span></button><a href="assets/blue-tower.glb" download aria-label="블루 타워 GLB 내려받기">GLB 내려받기</a></li><li><button type="button" aria-controls="structure-viewer" aria-pressed="false" disabled><img src="assets/red-tower.png" alt=""><span>레드 타워</span></button><a href="assets/red-tower.glb" download aria-label="레드 타워 GLB 내려받기">GLB 내려받기</a></li><li><button type="button" aria-controls="structure-viewer" aria-pressed="false" disabled><img src="assets/blue-core.png" alt=""><span>블루 코어</span></button><a href="assets/blue-core.glb" download aria-label="블루 코어 GLB 내려받기">GLB 내려받기</a></li><li><button type="button" aria-controls="structure-viewer" aria-pressed="false" disabled><img src="assets/red-core.png" alt=""><span>레드 코어</span></button><a href="assets/red-core.glb" download aria-label="레드 코어 GLB 내려받기">GLB 내려받기</a></li></ul></div>
+<h2 id="model-gallery-h">미러시티 진영 구조물<span class="count">3D 모델 6종</span></h2><div class="model-layout"><figure><div class="model-stage" id="model-stage"><template><model-viewer id="structure-viewer" src="assets/blue-inhibitor.glb" poster="assets/blue-inhibitor.png" alt="블루 억제기 3D 모델" camera-controls touch-action="pan-y" loading="eager" interaction-prompt="none"></model-viewer></template><img class="model-cover" src="assets/blue-inhibitor.png" alt=""></div><figcaption><strong>블루 억제기</strong><span class="model-status" role="status"></span><button type="button" class="readbtn model-retry" aria-controls="model-stage" hidden>3D 보기 다시 시도</button></figcaption><noscript>3D로 회전하려면 자바스크립트를 켜세요. 아래 목록에서 각 모델의 대표 이미지를 볼 수 있습니다.</noscript></figure><div class="model-groups"><div><ul class="model-list" data-fragment="team-structures" aria-label="미러시티 진영 구조물 선택"><li><button type="button" data-src="assets/blue-inhibitor.glb" aria-controls="model-stage" aria-pressed="true" disabled><img src="assets/blue-inhibitor.png" alt=""><span>블루 억제기</span></button></li><li><button type="button" data-src="assets/red-inhibitor.glb" aria-controls="model-stage" aria-pressed="false" disabled><img src="assets/red-inhibitor.png" alt=""><span>레드 억제기</span></button></li><li><button type="button" data-src="assets/blue-tower.glb" aria-controls="model-stage" aria-pressed="false" disabled><img src="assets/blue-tower.png" alt=""><span>블루 타워</span></button></li><li><button type="button" data-src="assets/red-tower.glb" aria-controls="model-stage" aria-pressed="false" disabled><img src="assets/red-tower.png" alt=""><span>레드 타워</span></button></li><li><button type="button" data-src="assets/blue-core.glb" aria-controls="model-stage" aria-pressed="false" disabled><img src="assets/blue-core.png" alt=""><span>블루 코어</span></button></li><li><button type="button" data-src="assets/red-core.glb" aria-controls="model-stage" aria-pressed="false" disabled><img src="assets/red-core.png" alt=""><span>레드 코어</span></button></li></ul></div></div></div>
 <script>
 (() => {
-  const gallery = document.getElementById('team-structures');
-  const buttons = gallery.querySelectorAll('button');
+  const gallery = document.currentScript.closest('.model-gallery');
+  const buttons = gallery.querySelectorAll('button[data-src]');
+  const lists = gallery.querySelectorAll('.model-list');
   const cover = gallery.querySelector('.model-cover');
   const label = gallery.querySelector('figcaption strong');
   const status = gallery.querySelector('.model-status');
-  let viewer = gallery.querySelector('model-viewer');
-  let selected = buttons[0];
-  let failed = false;
+  const retry = gallery.querySelector('.model-retry');
+  const prototype = gallery.querySelector('template').content.firstElementChild;
+  let viewer, selected, slowTimer;
 
-  function watch(current) {
-    failed = false;
+  function select(button, again = false) {
+    if (selected === button && !again) return;
+    clearTimeout(slowTimer);
+    if (selected) selected.setAttribute('aria-pressed', 'false');
+    selected = button;
+    button.setAttribute('aria-pressed', 'true');
+    const name = button.querySelector('span').textContent;
+    const poster = button.querySelector('img').getAttribute('src');
+    label.textContent = name;
+    cover.src = poster;
     cover.hidden = false;
-    status.textContent = '3D 모델을 불러오는 중입니다.';
-    current.addEventListener('load', () => {
-      if (current !== viewer) return;
-      cover.hidden = true;
-      status.textContent = '드래그하거나 방향키를 눌러 회전하고, 휠이나 두 손가락으로 확대하세요.';
-    });
-    current.addEventListener('error', () => {
-      if (current !== viewer) return;
-      failed = true;
-      cover.hidden = false;
-      status.textContent = '3D 모델을 표시할 수 없습니다. 구조물을 다시 선택하거나 GLB를 내려받으세요.';
-    });
-  }
-
-  watch(viewer);
-  document.addEventListener('DOMContentLoaded', () => {
+    retry.hidden = true;
     if (!window.customElements || !customElements.get('model-viewer')) {
-      status.textContent = '이 브라우저에서 3D 보기를 열 수 없습니다. 아래에서 GLB를 내려받으세요.';
+      status.textContent = '3D 뷰어를 열 수 없어 대표 이미지를 표시합니다.';
+      retry.hidden = !window.customElements;
+      retry.textContent = '페이지 새로 고침';
       return;
     }
+
+    const current = prototype.cloneNode(false);
+    const previous = viewer;
+    viewer = current;
+    current.setAttribute('poster', poster);
+    current.setAttribute('alt', name + ' 3D 모델');
+    const attempt = Number(button.dataset.retry || 0);
+    current.setAttribute('src', button.dataset.src + (attempt ? '?retry=' + attempt : ''));
+    status.textContent = name + ' 모델을 불러오는 중입니다.';
+    function offerRetry(message) {
+      if (current !== viewer) return;
+      clearTimeout(slowTimer);
+      // A failed or stalled URL can remain in the viewer's model cache.
+      button.dataset.retry = String(attempt + 1);
+      cover.hidden = false;
+      retry.hidden = false;
+      status.textContent = message;
+    }
+    slowTimer = setTimeout(() => offerRetry('3D 모델 표시가 늦어지고 있습니다. 더 기다리거나 다시 시도하세요.'), 20000);
+    current.addEventListener('load', () => {
+      if (current !== viewer) return;
+      clearTimeout(slowTimer);
+      if (attempt) button.dataset.retry = String(attempt);
+      else delete button.dataset.retry;
+      cover.hidden = true;
+      retry.hidden = true;
+      status.textContent = '드래그하거나 방향키를 눌러 회전하세요. 마우스 휠, 두 손가락 또는 Page Up·Page Down 키로 확대·축소할 수 있습니다.';
+    });
+    current.addEventListener('error', () => offerRetry('3D 모델을 표시할 수 없어 대표 이미지를 표시합니다.'));
+    if (previous) previous.replaceWith(current);
+    else cover.before(current);
+  }
+
+  function fragmentChoice() {
+    for (const list of lists) {
+      if ('#' + list.dataset.fragment === location.hash) return list.querySelector('button');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
     for (const button of buttons) {
       button.disabled = false;
-      button.addEventListener('click', () => {
-        if (button === selected && !failed) return;
-        const name = button.querySelector('span').textContent;
-        const poster = button.querySelector('img').getAttribute('src');
-        const src = button.parentElement.querySelector('a').getAttribute('href');
-        // Keep a late load/error from the previous request off the new selection.
-        const previous = viewer;
-        viewer = previous.cloneNode(false);
-        viewer.setAttribute('poster', poster);
-        viewer.setAttribute('alt', name + ' 3D 모델');
-        viewer.setAttribute('src', src);
-        watch(viewer);
-        selected.setAttribute('aria-pressed', 'false');
-        selected = button;
-        selected.setAttribute('aria-pressed', 'true');
-        label.textContent = name;
-        cover.setAttribute('src', poster);
-        previous.replaceWith(viewer);
+      button.addEventListener('click', event => {
+        select(button);
+        const stage = cover.parentElement;
+        if (event.detail && stage.getBoundingClientRect().bottom <= 0) stage.scrollIntoView({block: 'nearest'});
       });
     }
+    retry.addEventListener('click', () => {
+      if (viewer) select(selected, true);
+      else location.reload();
+    });
+    window.addEventListener('hashchange', () => {
+      const button = fragmentChoice();
+      if (button) select(button);
+    });
+    select(fragmentChoice() || buttons[0]);
   });
 })();
 </script>
@@ -313,7 +359,7 @@ footer{font-size:12px;color:var(--ink-2);border-top:1px solid var(--line);paddin
 <section class="box" id="art-report" aria-labelledby="art-report-h"><h2 id="art-report-h">아트 중간 보고</h2><ul><li>대표가 직접 만든 청색 근접 드론 다섯째 판을 보관 폴더로 옮겼습니다. 15관절 골격에 기본 공격 둘, 걷기, 달리기, 사망 셋까지 일곱 동작이 들어 있으며 이전 네 판도 함께 보존했습니다. 게임 엔진 반입과 화면 재생은 아직 확인하지 않았고, 추가 모델·동작 생성은 멈춘 채 기존 확보분 정리를 먼저 진행합니다.</li><li>이그니션 코어의 기본 공격을 앞발 찍기와 차체 들이받기로 교체했습니다. 각각 2.07초와 1.97초입니다. 기존 몸체의 금속 재질과 색을 유지했고, 두 동작이 제출본과 같은 움직임으로 재생되는지 확인했습니다. 공격 파일을 바꾼 것으로, 실제 경기의 피해 판정이나 이동 거리를 바꾸지는 않았습니다. 게임 내 재생은 아직 확인하지 않았습니다.</li><li>단품 외관 검수를 통과한 9종이 모두 맵에 맞는 것은 아닙니다. 직선 암벽과 코너 암괴는 각 자리에 맞게 크기를 조정해야 합니다. 두 수풀은 31 m와 62 m의 관전 위치를 정했지만 시험 맵이 단색 도형뿐이고 실제 지형·강변 자갈 재질과 수풀 반입본이 없어 촬영하지 않았습니다. 벽 밀착 수풀의 은폐 경계는 아직 판정할 수 없습니다.</li><li>독립 검토에서 포탑이 무너진 뒤 남는 기단만 새 시험 배치 후보가 됐습니다. 원본을 23.81배로 키우면 지름이 240.12 cm로 240 cm 한계를 조금 넘습니다. 23.79배에서는 지름 239.92 cm로 한계 안에 들어옵니다. 가장자리가 떠 있으므로 노면에 2~2.5 cm 묻고 접지를 시험하는 조건입니다. 실제 맵에서의 들뜸과 시야 차폐는 아직 확인하지 않았습니다.</li><li>수정 후 다시 볼 7종은 강가 바위, 강가 수풀, 고목, 정상 포탑의 좌대·회전 상부·방호 링, 직선 연석입니다. 강가 바위는 인공 받침이 드러나고, 강가 수풀은 목표보다 25 cm 낮고 잎 사이가 벌어지며, 고목 뿌리는 원래 크기로 놓으면 보행 통로를 침범합니다. 여울 평석은 평면 시안만 있어 11종에 포함하지 않았습니다.</li><li>정상 포탑은 높이와 상하 부품의 접합을 동시에 맞추지 못했습니다. 방호 링은 기단에 겹치지 않게 키우면 바깥지름이 약 4.46 m가 되어 상한 3.00 m를 넘습니다. 지정한 장갑판에만 진영색을 입힐 마스크도 필요합니다.</li><li>직선 연석은 길이 350 cm, 폭 35 cm, 높이 18 cm로 맞출 수 있지만 붙이면 V자 홈이 반복됩니다. 홈 폭은 모따기를 잰 제작 측정에서 11.17 cm, 레벨의 단면 측정에서 8.44 cm로 경계를 다르게 잡아 하나의 값으로 확정하지 않았습니다. 강가 쪽 짧은 구간은 179.3 cm와 265.9 cm여서 한 조각도 들어가지 않습니다. 긴 직선부에서 일부 시험하는 것과 도로 전체를 마감하는 것은 별개입니다.</li><li>적색 슈퍼와 적색 근접 기체의 골격을 실제 파일에서 확인했습니다. 각각 24관절이고, 근접 기체의 칼날은 오른팔에 있습니다. 다만 슈퍼의 바이저·가슴 코어와 근접 기체의 칼날 가장자리는 원화보다 잘 구별되지 않아 외관은 두 기체 모두 보류입니다. 제공된 리그 파일에는 정지 자세만 있어 움직일 때의 장갑 변형과 관통 여부는 검증하지 않았습니다. 청·적 호버와 공성 전차 네 기체는 여전히 모델만 있고 기계 골격은 없습니다.</li><li>수정 벙커와 변전 설비는 여섯 방향에서 지붕·네 외벽·문이 닫힌 것을 확인했고, 둘 다 단품 아트 검수를 통과했습니다. 파이프 암반과 지하 셔터도 위치·크기 시험 후보지만, 암반의 작은 파편과 셔터 차양 뒤 홈·검은 얼룩 때문에 아트 마감은 보류입니다. 네 모델 모두 실제 맵에는 아직 설치하지 않았습니다.</li><li>첫 환경 모델 일곱 개의 독립 아트 판정은 치명 4건·중간 6건·사소 1건입니다. 치명 결함은 첫 벙커의 열린 지붕, 위에서 한 덩어리로 보이는 고목 잎, 첫 변전 설비의 찢어진 외벽, 타이탄 팔 아래의 받침과 가는 파단 배관입니다. 기둥에서 떨어져 떠 있는 덩굴과 두 은폐 수풀 시안도 적용하지 않았습니다. 건물 수정본은 이 집계 밖입니다.</li><li>모델에 뼈대를 붙인 작업과 그 뼈대에 적용한 동작 모두 지정된 제작 서비스의 원본만 게임에 사용합니다. 이전 기본 공격 영상 12개는 별도로 만든 동작이어서 적용 대상과 아래 목록에서 제외했습니다.</li><li>기본 공격 제작 목표는 일곱 개입니다. 오버클럭과 이그니션은 각 두 개, 그림자 무리 대형·칼날 드론군·중장갑 골렘은 각 한 개입니다. 한 동작에서 한 번만 때려야 하며, 두 코어의 세 번째 공격은 만들지 않습니다. 오버클럭 두 개, 이그니션 두 개, 골렘 한 개를 실제 몸체에서 시험했지만, 게임용으로 채택한 공격은 아직 없습니다.</li><li>오버클럭과 골렘의 기존 걷기·달리기 네 개는 보류입니다. 새로 검수한 오버클럭의 오른 집게는 시작과 끝에 얼굴을 가리지 않고 한 번만 칩니다. 왼손도 균형만 잡습니다. 다만 옆으로 할퀴지 못하고 집게가 중앙에서 1.15초간 가라앉으며 금속 갑주 일부가 6.5배까지 늘어나 게임에 쓰지 않습니다.</li><li>두 가지 기본 공격은 뼈대 동작부터 다시 검수했습니다. 오버클럭 왼 집게는 반대 손까지 머리 위로 올려 두 번째로 내리칩니다. 골렘의 수직 내려치기는 한 번이지만 팔을 드는 데 0.80초, 내리는 데 1.93초가 걸리고 손이 바닥에 가까워질 때 이미 몸통이 펴져 있습니다. 둘 다 실제 캐릭터에 적용하지 않았습니다.</li><li>경비견 네 동작을 세 방향에서 검수한 결과 치명 7건, 중간 5건, 사소 4건을 찾았습니다. 걷기는 지지해야 할 앞발이 뜨고, 달리기는 다리 장갑이 서로 겹치며 반복 경계에서 자세가 튑니다. 긴 덮치기는 공중에서 방향이 바뀌고 착지 뒤 발이 밀립니다. 짧은 덮치기는 앞다리가 가슴과 겹쳐 전방을 한 번 치는 순간이 잘 보이지 않습니다. 발을 바닥에 고정하고 타격 자세를 바로잡은 뒤 다시 검수해야 합니다.</li><li>이그니션 코어의 걷기·달리기·정지 사망은 치명 8건·중간 1건·사소 1건으로 보류했습니다. 이동 내내 앞발이 기준 바닥보다 0.51~0.83 m 떠 있고 장갑이 휘며, 첫 사망 후보는 처음부터 쓰러져 있습니다. 별도로 검사한 측면 전도도 치명 2건·중간 1건·사소 1건입니다. 서 있다가 옆으로 넘어지지만 차체가 바닥 아래로 최대 0.512 m 들어가고 마지막까지 발이 움직여 적용하지 않습니다.</li><li>그림자 무리 대형의 가시 꼬리 후려치기는 원래 모델에 새 뼈대를 붙여도 적용되지 않았습니다. 부유 드론은 중앙 렌즈와 세 칼날이 따로 움직이는 공격이 아직 없습니다. 다른 동물의 동작이나 모델 전체를 돌린 영상으로 대체하지 않습니다.</li></ul></section>
 <section id="art-gallery" aria-labelledby="art-gallery-h"><h2 id="art-gallery-h">제작 결과물</h2><div class="art-grid"><article class="box"><h3>이그니션 코어 · 앞발 찍기와 차체 들이받기</h3><div class="shots"><figure class="shot"><a href="assets/jungle-ignition-leg-slam-hull-ram.png"><img src="assets/jungle-ignition-leg-slam-hull-ram.png" alt="위에는 앞발로 찍는 이그니션 코어, 아래에는 차체로 들이받는 이그니션 코어를 세 각도에서 본 모습" width="900" height="600" loading="lazy" decoding="async"></a></figure></div><p>윗줄은 앞발 찍기, 아랫줄은 차체 들이받기입니다. 두 재생본은 현재 공격 파일의 동작이며, 실제 경기 화면은 아닙니다.</p><ul class="motion-links"><li><a href="assets/jungle-ignition-leg-slam.webp" aria-label="이그니션 코어 · 앞발 찍기와 차체 들이받기 앞발 찍기 · 2.07초 동작 보기">앞발 찍기 · 2.07초 동작 보기</a></li><li><a href="assets/jungle-ignition-hull-ram.webp" aria-label="이그니션 코어 · 앞발 찍기와 차체 들이받기 차체 들이받기 · 1.97초 동작 보기">차체 들이받기 · 1.97초 동작 보기</a></li></ul></article><article class="box"><h3>구간 A · 정상 포탑의 두 조립 후보</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-turret-assembly-fit.png"><img src="assets/mirror-city-turret-assembly-fit.png" alt="같은 높이 눈금에서 비교한 두 포탑 단면. 비례를 유지한 왼쪽은 289.3 cm, 좌대를 위로 늘린 오른쪽은 412.5 cm이며 위쪽 부품이 받침보다 넓다." width="922" height="654" loading="lazy" decoding="async"></a></figure></div><p>왼쪽은 기단 지름에 맞춰 비례를 유지한 모델로 목표 높이 4.0~4.6 m에 못 미칩니다. 오른쪽은 좌대를 늘려 높이는 맞췄지만 상부 밑판이 받침 밖으로 양쪽에 22.7 cm씩 돌출됩니다. 원본 정점으로 비교한 단면도이며 실제 맵 화면이 아닙니다.</p></article><article class="box"><h3>구간 A · 자연 암반, 수풀, 고목</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-a-terrain-and-foliage.png"><img src="assets/mirror-city-a-terrain-and-foliage.png" alt="직선 절벽, 코너 암괴, 강가 바위, 폐허 고목, 벽 밀착 수풀, 강가 장형 수풀의 실제 형태를 두 각도에서 비교한 사진" width="896" height="792" loading="lazy" decoding="async"></a></figure></div><p>모델을 낮은 시점과 높은 시점에서 비교한 사진입니다. 직선 암벽과 코너 암괴는 크기를 맞춰 시험 배치할 수 있지만, 고목은 줄기의 밝은 외피가 끊겨 보이고 뿌리가 받침 암반 밖까지 뻗습니다. 이 사진은 실제 맵의 관전 거리에서 촬영한 것이 아닙니다.</p></article><article class="box"><h3>구간 A · 포탑 네 부품과 직선 연석</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-a-turret-and-curb.png"><img src="assets/mirror-city-a-turret-and-curb.png" alt="포탑의 좌대, 상부, 방호 링, 파괴 기단과 낮은 직선 연석을 각각 촬영한 비교 사진" width="896" height="792" loading="lazy" decoding="async"></a></figure></div><p>각 부품을 화면 크기에 맞춰 따로 촬영한 사진입니다. 원래 크기에서 좌대와 상부를 쌓으면 높이는 2.70 m입니다. 맵의 기단 지름에 맞춘 두 조립 후보는 별도 단면도에서 비교할 수 있습니다.</p></article><article class="box"><h3>적색 슈퍼와 근접 기체 · 골격 결합 후 정지 자세</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-red-lane-rigs.png"><img src="assets/mirror-city-red-lane-rigs.png" alt="적색 슈퍼와 오른팔에 칼날이 달린 적색 근접 기체를 정면, 측면, 높은 각도에서 촬영한 정지 자세" width="880" height="680" loading="lazy" decoding="async"></a></figure></div><p>위는 양팔에 중장갑을 두른 슈퍼 기체, 아래는 오른팔에 칼날이 달린 근접 기체입니다. 원화나 공격 동작이 아니라 뼈대에 연결된 모델의 정지 자세입니다.</p></article><article class="box"><h3>이그니션 코어 · 교체 전 덮치기 시험본</h3><div class="shots"><figure class="shot"><a href="assets/jungle-ignition-native-pounce-pair.png"><img src="assets/jungle-ignition-native-pounce-pair.png" alt="이그니션의 긴 덮치기와 짧은 덮치기를 위아래에 놓고 각각 시작, 공중 자세, 끝 자세를 옆에서 비교한 모습" width="1050" height="598" loading="lazy" decoding="async"></a></figure></div><p>첫 줄은 긴 덮치기, 둘째 줄은 짧은 덮치기입니다. 정지 화면은 왼쪽부터 시작·도약·회복 끝입니다. 재생하면 각각 정면·측면·높은 각도를 동시에 볼 수 있습니다. 짧은 동작은 33개 측정 시점 중 가장 낮은 발바닥도 바닥에서 약 7.6 cm 떠 있었습니다. 공중에 뛰는 것 자체가 아니라 출발과 착지에서 차체를 지탱하지 못하는 것이 문제입니다.</p><ul class="motion-links"><li><a href="assets/jungle-ignition-native-long-pounce.webp" aria-label="이그니션 코어 · 교체 전 덮치기 시험본 긴 덮치기 · 3.33초 동작 보기">긴 덮치기 · 3.33초 동작 보기</a></li><li><a href="assets/jungle-ignition-native-short-pounce.webp" aria-label="이그니션 코어 · 교체 전 덮치기 시험본 짧은 덮치기 · 1.10초 동작 보기">짧은 덮치기 · 1.10초 동작 보기</a></li></ul></article><article class="box"><h3>미러시티 배치용 정적 모델 다섯 종</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-static-priority.png"><img src="assets/mirror-city-static-priority.png" alt="암반, 벙커, 고목, 변전 설비, 닫힌 셔터 다섯 줄에 각각 세 방향에서 촬영한 실제 모형이 보입니다." width="900" height="1091" loading="lazy" decoding="async"></a></figure></div><p>위에서부터 파이프 암반, 첫 벙커, 고목, 첫 변전 설비, 지하 셔터입니다. 암반과 셔터만 시험 배치 후보입니다. 원화가 아닌 모델을 정면·측면·높은 각도에서 촬영했고 줄마다 화면 크기를 맞췄습니다. 실제 맵 크기나 배치 간격은 아닙니다.</p></article><article class="box"><h3>본진과 둥지의 확장 조형물</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-static-landmarks.png"><img src="assets/mirror-city-static-landmarks.png" alt="회백색의 수직 경계 기둥과 바닥에 누운 거대한 장갑 팔을 각각 세 방향으로 촬영했습니다." width="1018" height="514" loading="lazy" decoding="async"></a></figure></div><p>위는 본진 경계 기둥, 아래는 타이탄의 파손된 팔입니다. 둘 다 움직이지 않는 환경 장식입니다. 둥지 입구나 전투 시야를 가리는지는 실제 자리에서 따로 확인해야 합니다.</p></article><article class="box"><h3>닫힌 벙커 지붕 · 첫 모델과 수정본</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-bunker-roof.png"><img src="assets/mirror-city-bunker-roof.png" alt="오른쪽 높은 시점에서 첫 벙커의 지붕에는 검은 삼각 구멍이 보이지만 아래 수정본에서는 회색 지붕이 그 자리를 덮습니다." width="900" height="488" loading="lazy" decoding="async"></a></figure></div><p>위는 첫 모델, 아래는 수정본입니다. 중앙 지붕을 향한 수직선 81개 중 첫 모델은 11개가 건물 전체를 통과했고, 수정본은 81개 모두 지붕에 닿았습니다. 레벨 디자인이 반대쪽까지 확인해 시험 배치 후보에 넣었습니다. 뒤에도 닫힌 철문이 있어 한쪽 문을 암벽 쪽으로 돌리는 배치를 권했습니다. 실제 맵에는 설치하지 않았습니다.</p></article><article class="box"><h3>변전 설비 측벽 · 첫 모델과 수정본</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-substation-wall.png"><img src="assets/mirror-city-substation-wall.png" alt="두 줄의 같은 세 방향에서 변전 설비의 정면 문, 어두운 짧은 측벽과 상부 냉각팬을 비교할 수 있습니다." width="900" height="488" loading="lazy" decoding="async"></a></figure></div><p>위는 첫 모델, 아래는 수정본입니다. 레벨 디자인이 수정본을 여섯 방향에서 확인했습니다. 하부 외벽은 닫혀 있고, 위쪽 배관 아래는 원래 열려 있어야 하는 틈입니다. 지붕과 외벽의 구멍이나 무너짐이 없어 시험 배치 후보에 포함했습니다. 옆면에서 밝게 보이는 배관과 바닥 기준점은 정리 대상입니다.</p></article><article class="box"><h3>고목·경계 기둥·타이탄 팔 수정본</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-revised-landmarks.png"><img src="assets/mirror-city-revised-landmarks.png" alt="층을 나눈 고목, 이끼 낀 기둥, 굵은 배관이 드러난 파손 팔을 한 줄씩 세 방향에서 촬영한 그림" width="905" height="690" loading="lazy" decoding="async"></a></figure></div><p>둘째 줄의 경계 기둥만 단품 검수를 통과했습니다. 이끼는 몸통에 붙고 상시등이나 부유 조각이 없습니다. 첫 줄 고목은 잎이 한쪽에 쏠려 관전 각도에서 어두운 줄기와 금속 코어가 가려집니다. 셋째 줄 타이탄 팔은 원화보다 손가락이 하나 많고, 절단면 안쪽에 있어야 할 배관이 어깨 옆으로 튀어나와 보류했습니다. 세 모델 모두 실제 맵에는 아직 설치하지 않았습니다.</p></article><article class="box"><h3>고목의 몸통과 타이탄 팔의 절단면</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-core-and-arm-followup.png"><img src="assets/mirror-city-core-and-arm-followup.png" alt="윗줄은 S자로 휜 회색 고목의 정면과 서로 반대인 두 높은 시점, 아랫줄은 파손된 팔의 손끝·절단면·옆모습입니다." width="900" height="600" loading="lazy" decoding="async"></a></figure></div><p>위 고목은 두 검수 모두 보류했습니다. 회백색 몸통과 금속 코어는 맞지만 잎이 한쪽에 몰려 위에서 뿌리 가시가 먼저 보입니다. 아래 타이탄 팔은 레벨 디자인 단품 검수를 통과했지만 아트 마감은 보류입니다. 네 손가락과 바닥 지지는 살렸으나 반대쪽 어깨가 둥근 장갑으로 막히고 굵은 관 두 개가 비스듬히 솟습니다. 두 모델 모두 미배치입니다.</p></article><article class="box"><h3>정글형 은폐 수풀</h3><div class="shots"><figure class="shot"><a href="assets/mirror-city-jungle-shrub.png"><img src="assets/mirror-city-jungle-shrub.png" alt="왼쪽은 둥근 회색 수풀의 원래 비례, 오른쪽은 같은 수풀을 좁고 길게 배치한 모습입니다. 노란 선은 목표 면적이며 갈색 인체 모형은 1.80 m입니다." width="1280" height="470" loading="lazy" decoding="async"></a></figure></div><p>두 안 모두 게임 적용을 보류했습니다. 원래 비례로 길이를 맞추면 폭이 목표보다 1.38 m 넓습니다. 폭을 맞춘 오른쪽은 캐릭터 상체가 보이지만 위에서 보면 수풀이 목표 면적의 약 60%만 덮고, 관전 거리에서는 잎이 자갈처럼 보입니다. 독립 검수 결과는 치명 3건, 중간 1건, 사소 1건입니다. 다음 형태는 벽에 붙는 긴 뒷면과 크게 겹친 잎부터 고칩니다.</p></article><article class="box"><h3>오버클럭 코어</h3><div class="shots"><figure class="shot"><a href="assets/jungle-overclock.png"><img src="assets/jungle-overclock.png" alt="푸른빛이 비치는 가슴 양쪽에 두꺼운 장갑과 커다란 집게손이 달린 오버클럭 코어의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>기존 걷기·달리기·공격 둘·사망 둘은 모두 보류입니다. 아래 낮은 오른 집게 시험은 실제 몸체에 적용한 별도 동작입니다. 한 번만 치고 왼손은 균형을 잡지만, 집게가 옆을 가르지 못하고 끝이 바닥을 12 cm 뚫습니다. 모델 가슴의 청색도 기본색일 뿐, 발광하는 재질은 아직 없습니다.</p><ul class="motion-links"><li><a href="assets/jungle-overclock-native-walking.webp" aria-label="오버클럭 코어 걷기 · 무릎 장갑 겹침 · 보류 동작 보기">걷기 · 무릎 장갑 겹침 · 보류 동작 보기</a></li><li><a href="assets/jungle-overclock-native-running.webp" aria-label="오버클럭 코어 달리기 · 사람 조깅 자세 · 보류 동작 보기">달리기 · 사람 조깅 자세 · 보류 동작 보기</a></li><li><a href="assets/jungle-overclock-low-claw-study.webp" aria-label="오버클럭 코어 오른 집게 한 번 · 갑주 늘어남 · 보류 동작 보기">오른 집게 한 번 · 갑주 늘어남 · 보류 동작 보기</a></li><li><a href="assets/jungle-overclock-native-strike1.webp" aria-label="오버클럭 코어 공격 A · 반대 팔 사용 · 보류 동작 보기">공격 A · 반대 팔 사용 · 보류 동작 보기</a></li><li><a href="assets/jungle-overclock-native-strike2.webp" aria-label="오버클럭 코어 공격 B · 두 번 타격 · 보류 동작 보기">공격 B · 두 번 타격 · 보류 동작 보기</a></li><li><a href="assets/jungle-overclock-native-death1.webp" aria-label="오버클럭 코어 사망 A · 방향 반대 · 보류 동작 보기">사망 A · 방향 반대 · 보류 동작 보기</a></li><li><a href="assets/jungle-overclock-native-death2.webp" aria-label="오버클럭 코어 사망 B · 끝 자세 미정지 · 보류 동작 보기">사망 B · 끝 자세 미정지 · 보류 동작 보기</a></li></ul></article><article class="box"><h3>이그니션 코어</h3><div class="shots"><figure class="shot"><a href="assets/jungle-ignition.png"><img src="assets/jungle-ignition.png" alt="네 개의 굵은 다리가 납작한 주황빛 장갑 몸체를 받치는 이그니션 코어의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>걷기 단독 검수에서 치명 결함 세 건을 확인해 게임 적용을 보류했습니다. 0.667초 한 주기의 16개 시점 모두에서 두 앞발이 기준 바닥보다 약 0.51~0.61 m 떠 있고, 뒷다리끼리 겹치고, 장갑이 휘어 어깨를 뚫습니다. 달리기와 측면 전도도 별개로 보류했습니다. 각 영상의 왼쪽부터 정면·측면·관전 각도입니다.</p><ul class="motion-links"><li><a href="assets/jungle-ignition-walking.webp" aria-label="이그니션 코어 걷기 · 적용 보류 동작 보기">걷기 · 적용 보류 동작 보기</a></li><li><a href="assets/jungle-ignition-running.webp" aria-label="이그니션 코어 달리기 · 적용 보류 동작 보기">달리기 · 적용 보류 동작 보기</a></li><li><a href="assets/jungle-ignition-side-collapse.webp" aria-label="이그니션 코어 측면 전도 · 적용 보류 · 1.83초 동작 보기">측면 전도 · 적용 보류 · 1.83초 동작 보기</a></li></ul></article><article class="box"><h3>이그니션 코어 · 네 발 접지 시험</h3><div class="shots"><figure class="shot"><a href="assets/jungle-ignition-four-corner-body.png"><img src="assets/jungle-ignition-four-corner-body.png" alt="낮은 용광로 몸체의 네 모서리에 다리를 벌린 새 정지 모델을 정면·측면·위에서 본 모습" width="900" height="300" loading="lazy" decoding="async"></a></figure></div><p>사진은 네 모서리에 다리를 벌린 새 정지 모델입니다. 두 영상은 이 모델이 아니라 기존 몸체에 뼈대를 다시 붙여 촬영했습니다. 독립 검수에서 기본 걷기는 16시점 모두 네 발이 떴습니다. 낮춘 걷기는 앞발이 일부 닿지만 뒷발은 내내 59~84 cm 떠 있습니다. 둘 다 대각선 다리로 번갈아 차체를 받치지 못해 보류했습니다.</p><ul class="motion-links"><li><a href="assets/jungle-ignition-four-leg-default-study.webp" aria-label="이그니션 코어 · 네 발 접지 시험 기존 몸체 재리깅 · 네 발 모두 뜸 동작 보기">기존 몸체 재리깅 · 네 발 모두 뜸 동작 보기</a></li><li><a href="assets/jungle-ignition-low-stance-study.webp" aria-label="이그니션 코어 · 네 발 접지 시험 기존 몸체의 낮춘 걷기 · 뒷발이 뜸 동작 보기">기존 몸체의 낮춘 걷기 · 뒷발이 뜸 동작 보기</a></li></ul></article><article class="box"><h3>이그니션 코어 · 정지 모델의 바닥 보정</h3><div class="shots"><figure class="shot"><a href="assets/jungle-ignition-fixed-origin.png"><img src="assets/jungle-ignition-fixed-origin.png" alt="같은 이그니션 모델의 보정 전후 옆모습과 위에서 본 네 발바닥. 보정 뒤 네 발이 붉은 바닥선에 닿고 뒤쪽 두 발의 앞뒤 비대칭은 남아 있습니다." width="1100" height="590" loading="lazy" decoding="async"></a></figure></div><p>왼쪽은 기존 정지 모델, 가운데는 같은 모델을 63.33 cm 올려 발바닥에 원점을 맞춘 결과입니다. 네 발이 모두 바닥에서 0.1 mm 이내에 놓입니다. 차체와 다리 모양은 바꾸지 않아 뒤쪽 두 발의 앞뒤 어긋남 26.4 cm는 그대로입니다. 정지 모델만 고쳤고 보행은 통과하지 않았습니다.</p></article><article class="box"><h3>외곽 경비견</h3><div class="shots"><figure class="shot"><a href="assets/jungle-hound.png"><img src="assets/jungle-hound.png" alt="긴 주둥이와 위로 휜 꼬리, 관절이 드러난 네 다리를 가진 기계 경비견의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>긴 덮치기는 3.33초, 짧은 덮치기는 1.10초입니다. 아래는 검수에 사용한 원본 영상이지 채택된 동작이 아닙니다. 각 영상은 왼쪽부터 정면, 측면, 관전 시점입니다.</p><ul class="motion-links"><li><a href="assets/jungle-hound-walk.webp" aria-label="외곽 경비견 걷기 동작 보기">걷기 동작 보기</a></li><li><a href="assets/jungle-hound-run.webp" aria-label="외곽 경비견 달리기 동작 보기">달리기 동작 보기</a></li><li><a href="assets/jungle-hound-pounce-01.webp" aria-label="외곽 경비견 긴 덮치기 · 3.33초 동작 보기">긴 덮치기 · 3.33초 동작 보기</a></li><li><a href="assets/jungle-hound-pounce-02.webp" aria-label="외곽 경비견 짧은 덮치기 · 1.10초 동작 보기">짧은 덮치기 · 1.10초 동작 보기</a></li></ul></article><article class="box"><h3>그림자 무리 대형</h3><div class="shots"><figure class="shot"><a href="assets/jungle-shadow.png"><img src="assets/jungle-shadow.png" alt="보라색 등가시가 솟고 긴 꼬리가 뒤로 뻗은 그림자 무리 대형이 네 다리를 낮춘 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>이번 개체는 대형입니다. 긴 꼬리로 한 번 치는 동작을 시도했으나 이 몸체의 새 뼈대에 적용되지 않아 보여 줄 공격 영상은 없습니다. 소형의 디자인과 캠프 구성은 별도입니다.</p></article><article class="box"><h3>칼날 드론군</h3><div class="shots"><figure class="shot"><a href="assets/jungle-blades.png"><img src="assets/jungle-blades.png" alt="원형 중심부 둘레에 굽은 칼날 세 개가 달린 드론의 정면, 측면, 관전 각도 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>옆에서 보면 몸체가 낮고, 관전 각도에서는 중앙부를 둘러싼 세 날개가 구분됩니다.</p></article><article class="box"><h3>중장갑 골렘</h3><div class="shots"><figure class="shot"><a href="assets/jungle-golem.png"><img src="assets/jungle-golem.png" alt="녹색 이끼가 낀 회색 바위 어깨와 긴 두 팔을 가진 중장갑 골렘의 세 방향 모습" width="960" height="320" loading="lazy" decoding="async"></a></figure></div><p>아래에 있는 걷기·달리기·공격·사망 둘은 모두 보류입니다. 별도로 검수한 횡타 원본은 복싱 가드 없이 오른팔로 한 번 묵직하게 치는 부분을 살렸습니다. 다만 시작 때 발이 뜨고 끝에서 오른팔이 골반보다 높게 남았습니다. 이 원본을 바위 몸체에 적용하거나 게임에 넣지는 않았습니다.</p><ul class="motion-links"><li><a href="assets/jungle-golem-native-walking.webp" aria-label="중장갑 골렘 걷기 · 양발이 바닥 아래 · 보류 동작 보기">걷기 · 양발이 바닥 아래 · 보류 동작 보기</a></li><li><a href="assets/jungle-golem-native-running.webp" aria-label="중장갑 골렘 달리기 · 가벼운 조깅과 팔 관통 · 보류 동작 보기">달리기 · 가벼운 조깅과 팔 관통 · 보류 동작 보기</a></li><li><a href="assets/jungle-golem-native-strike1.webp" aria-label="중장갑 골렘 한 팔 횡타 · 장갑 관통 · 보류 동작 보기">한 팔 횡타 · 장갑 관통 · 보류 동작 보기</a></li><li><a href="assets/jungle-golem-native-death1.webp" aria-label="중장갑 골렘 사망 A · 다시 일어남 · 보류 동작 보기">사망 A · 다시 일어남 · 보류 동작 보기</a></li><li><a href="assets/jungle-golem-native-death2.webp" aria-label="중장갑 골렘 사망 B · 바닥 관통 · 보류 동작 보기">사망 B · 바닥 관통 · 보류 동작 보기</a></li></ul></article></div></section>
   </main>
-  <footer>이 현황판은 손으로 고른 공개용 요약 한 파일에서 생성합니다. 실행으로 확인한 것만 검증 기록에 적고, 대표의 답은 대표가 실제로 답한 항목에만 적습니다.</footer>
+  <footer>이 현황판은 손으로 고른 공개용 자료에서 생성합니다. 실행으로 확인한 것만 검증 기록에 적고, 대표의 답은 대표가 실제로 답한 항목에만 적습니다.</footer>
 </div>
 </body>
 </html>
