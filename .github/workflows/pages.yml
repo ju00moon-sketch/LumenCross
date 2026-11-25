@@ -3,6 +3,8 @@ name: Deploy status page
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'activity.json'
   workflow_dispatch:
 
 permissions:
