@@ -142,6 +142,58 @@ ol.steps li:first-child{border-top:0}
 .art-grid p,.art-grid h3,.art-grid .shots{margin:0}
 .motion-links{display:flex;flex-wrap:wrap;gap:4px 14px;list-style:none;padding:0;margin:0}
 .motion-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink)}
+.cx-status{margin:0 0 4px;padding-left:18px;font-size:14px;display:grid;gap:3px;max-width:80ch}
+.cx-find{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 6px}
+.cx-find label{font-size:13px;color:var(--ink-2)}
+.cx-find input{font:inherit;font-size:15px;min-height:44px;padding:6px 12px;border:1px solid var(--ink-3);border-radius:6px;background:var(--panel);color:var(--ink);width:min(100%,320px)}
+.cx-find input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.cx-count{font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+.cx-wrap{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:28px;align-items:start;margin-top:18px}
+.cx-index{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;font-size:13.5px;padding-right:6px}
+.cx-index h3{font-family:var(--serif);font-size:15px;margin:14px 0 4px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cx-index h3:first-child{margin-top:0}
+.cx-index h3 a{color:var(--ink)}
+.cx-index h3 span{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--ink-2)}
+.cx-index ul{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.cx-index li a{display:block;padding:5px 10px;color:var(--ink-2);text-decoration:none}
+.cx-index li a:hover{color:var(--ink);text-decoration:underline}
+.cx-region{margin:0 0 36px}
+.cx-rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;border-bottom:2px solid var(--ink);padding-bottom:6px;margin:0 0 8px}
+.cx-rhead h2{font-family:var(--serif);font-size:24px;margin:0}
+.cx-en{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-2);margin-left:8px}
+.cx-rsum{font-size:14px;color:var(--ink-2);max-width:72ch;margin:0 0 14px}
+.cx-entry{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 12px;display:grid;gap:10px;min-width:0;scroll-margin-top:12px}
+.cx-entry h3{font-family:var(--serif);font-size:20px;margin:0}
+.cx-title{margin:2px 0 0;font-size:14px;color:var(--brass)}
+.cx-facts{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 12px;margin:0;font-size:13.5px}
+.cx-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start}
+.cx-id{display:grid;gap:8px;min-width:0}
+.cx-portrait{display:block;width:200px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.cx-portrait img{display:block;width:100%;height:auto}
+@media (max-width:560px){.cx-top{grid-template-columns:minmax(0,1fr)}.cx-portrait{width:min(100%,240px)}}
+.cx-facts dt{color:var(--ink-2)}
+.cx-facts dd{margin:0;overflow-wrap:anywhere}
+.cx-concept{margin:0;font-size:14.5px;max-width:72ch}
+.cx-skills{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.cx-skills>li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.cx-skills>li:last-child{border-bottom:0;padding-bottom:0}
+.cx-slot{font-family:var(--mono);font-size:14px;font-weight:700;width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--ink-3);border-radius:6px}
+.cx-skills h4{margin:0 0 2px;font-size:15px}
+.cx-skills p{margin:0;font-size:14px;color:var(--ink-2);max-width:72ch}
+.cx-num summary{cursor:pointer;font-size:13px;color:var(--ink-2);padding:10px 0}
+.cx-tbl{border-collapse:collapse;font-size:13px}
+.cx-tbl th,.cx-tbl td{text-align:left;padding:3px 14px 3px 0;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}
+.cx-tbl th{font-weight:500;color:var(--ink-2)}
+.cx-tbl td.v{font-family:var(--mono)}
+.cx-entry[hidden],.cx-region[hidden],.cx-index li[hidden]{display:none}
+@media (max-width:999px){
+  .cx-wrap{grid-template-columns:minmax(0,1fr);gap:16px}
+  .cx-index{position:static;max-height:none;overflow:visible;display:flex;flex-wrap:wrap;gap:8px;padding:0}
+  .cx-index ul{display:none}
+  .cx-index h3{margin:0}
+  .cx-index h3 a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:6px;text-decoration:none}
+  .cx-index h3 span{display:none}
+}
 .act{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
 .act li{border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:grid;gap:2px;align-content:start;min-width:0}
 .act-t{margin:0;font-size:12.5px;color:var(--ink-2)}
@@ -153,11 +205,11 @@ footer{font-size:12px;color:var(--ink-2);border-top:1px solid var(--line);paddin
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow"><span>LumenCross · e스포츠 구단 운영 게임</span><span class="asof">2026-11-25 20:00 KST 기준</span></div>
+    <div class="eyebrow"><span>LumenCross · e스포츠 구단 운영 게임</span><span class="asof">2026-11-25 20:53 KST 기준</span></div>
     <h1>LumenCross 작업 현황판</h1>
-    <p class="goalline">20:00 기준입니다. 이 탭의 두 목록과 레인의 열린 작업 줄을 지금 사실로 다시 썼고, 끝난 일의 이력은 완료·종결 탭으로 넘겼습니다. 지금 답하실 카드는 없고 총괄 결정 보고는 12건입니다(기획 검토 탭). 새 소식: 관전 HUD의 시안 디자인 구현(자체 실행), 설계서 셋째 재확인의 보류(중간 5), 보호막 통계의 계약 보정 C-64. 실제 5대5는 실행 파일 둘로 직접 여실 수 있습니다(기획 검토 탭의 VIEW-02).</p>
+    <p class="goalline">20:53 기준입니다. 새 탭 계약자 도감을 열었습니다: 대표가 보낸 계약자 기획안 40명을 지역 9곳으로 나눠 실었고, 그림을 받은 세 명에는 일러스트를 붙였습니다(수치는 시험값이며 확정이 아닙니다). 지금 답하실 카드는 없고 총괄 결정 보고는 12건입니다(기획 검토 탭). 사용 한도에 닿아 멈춘 세 역할(글·현황 문장, UI/UX, 레벨)은 대표의 말씀대로 21:22 무렵에 다시 잇습니다. 20:31에 받은 공동 검토 의견은 반영 중이며 다음 갱신에 싣습니다. 실제 5대5는 실행 파일 둘로 직접 여실 수 있습니다(기획 검토 탭의 VIEW-02).</p>
     <div class="legend" aria-label="상태 표시"><span class="chip s-active">진행</span><span class="chip s-wait">대기</span><span class="chip s-decide">확인 필요</span><span class="chip s-hold">보류</span><span class="chip s-done">완료</span></div>
-    <nav class="tabs" aria-label="현황판 페이지"><a class="tab" href="index.html">작업 현황</a><a class="tab is-on" href="review.html" aria-current="page">기획 검토</a><a class="tab" href="closed.html">완료·종결</a><a class="tab" href="art.html">아트</a></nav>
+    <nav class="tabs" aria-label="현황판 페이지"><a class="tab" href="index.html">작업 현황</a><a class="tab is-on" href="review.html" aria-current="page">기획 검토</a><a class="tab" href="closed.html">완료·종결</a><a class="tab" href="contractors.html">계약자 도감</a><a class="tab" href="art.html">아트</a></nav>
   </header>
   <main class="wrap-main">
 <section id="decisions" aria-labelledby="decisions-h"><h2 id="decisions-h">대표가 답하실 것<span class="count">0건</span></h2><p class="readme">대표의 답을 기다리는 질문은 이 칸에만 둡니다. 실제로 답을 받은 항목만 <a href="closed.html#closed-decisions">완료·종결 탭</a>으로 옮기며, 읽음 표시는 이 브라우저에만 남는 표시이고 답변이나 승인이 아닙니다.</p><div class="wcat"><p class="empty">열린 대표 결정은 없습니다.</p></div></section>
