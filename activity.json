@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-25T20:31:15+09:00",
+ "generated_at": "2026-11-25T20:34:15+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T20:30:07+09:00"
+   "last_activity_at": "2026-11-25T20:33:53+09:00"
   },
   {
    "name": "통합·배포",
@@ -14,22 +14,22 @@
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T20:30:58+09:00"
+   "last_activity_at": "2026-11-25T20:33:49+09:00"
   },
   {
    "name": "경기 AI",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T20:27:20+09:00"
+   "last_activity_at": "2026-11-25T20:32:54+09:00"
   },
   {
    "name": "구단·대회·저장",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T20:24:24+09:00"
+   "last_activity_at": "2026-11-25T20:34:15+09:00"
   },
   {
    "name": "검증·내러티브 엔진",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-25T20:24:21+09:00"
+   "state": "대기",
+   "last_activity_at": "2026-11-25T20:34:05+09:00"
   },
   {
    "name": "QA A",
