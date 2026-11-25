@@ -1,6 +1,6 @@
 {
  "title": "LumenCross 작업 현황판",
- "as_of": "2026-11-25 23:55 KST",
+ "as_of": "2026-11-26 00:10 KST",
  "summary": "무거운 작업의 잠금 결함을 닫았습니다. 상태를 확인하기만 해서는 줄과 번호표가 바뀌지 않고, 진입을 막는 폴더는 그대로 둡니다. 선수 판단과 드론 반격을 함께 켠 5대5 경기는 비교에 들어갔습니다. 출전·관전 설계의 네 경계는 수정본을 독립 검증 중입니다. 지금 답하실 카드는 없습니다.",
  "baseline": {
   "패키지 배포": "1.2-final-r3",
@@ -29,7 +29,7 @@
   "counterexamples_open": 28,
   "counterexamples_closed": 50,
   "verification": 216,
-  "changelog": 87
+  "changelog": 88
  },
  "open": {
   "not_done": [
