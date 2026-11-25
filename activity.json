@@ -1,30 +1,30 @@
 {
- "generated_at": "2026-11-25T13:04:34+09:00",
+ "generated_at": "2026-11-25T13:07:34+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T13:04:10+09:00"
+   "last_activity_at": "2026-11-25T13:07:23+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T13:04:31+09:00"
+   "last_activity_at": "2026-11-25T13:07:25+09:00"
   },
   {
    "name": "경기 코어·AI",
-   "state": "대기",
-   "last_activity_at": "2026-11-25T13:03:40+09:00"
+   "state": "작업 중",
+   "last_activity_at": "2026-11-25T13:07:30+09:00"
   },
   {
    "name": "구단·대회·저장",
    "state": "대기",
-   "last_activity_at": "2026-11-25T12:56:09+09:00"
+   "last_activity_at": "2026-11-25T13:06:56+09:00"
   },
   {
    "name": "검증·내러티브 엔진",
    "state": "대기",
-   "last_activity_at": "2026-11-25T12:56:38+09:00"
+   "last_activity_at": "2026-11-25T13:06:50+09:00"
   },
   {
    "name": "아트",
@@ -34,7 +34,7 @@
   {
    "name": "UI/UX",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T13:00:26+09:00"
+   "last_activity_at": "2026-11-25T13:07:31+09:00"
   },
   {
    "name": "글 콘텐츠 검수",
@@ -49,12 +49,12 @@
   {
    "name": "UI 소스 작성",
    "state": "대기",
-   "last_activity_at": "2026-11-25T12:56:16+09:00"
+   "last_activity_at": "2026-11-25T13:06:54+09:00"
   },
   {
    "name": "레벨 디자인",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T13:01:42+09:00"
+   "last_activity_at": "2026-11-25T13:05:57+09:00"
   }
  ]
 }
