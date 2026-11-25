@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-25T14:07:15+09:00",
+ "generated_at": "2026-11-25T14:10:15+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:07:13+09:00"
+   "last_activity_at": "2026-11-25T14:10:13+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:04:22+09:00"
+   "last_activity_at": "2026-11-25T14:10:07+09:00"
   },
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:06:37+09:00"
+   "last_activity_at": "2026-11-25T14:10:05+09:00"
   },
   {
    "name": "경기 AI",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:07:09+09:00"
+   "state": "대기",
+   "last_activity_at": "2026-11-25T14:09:17+09:00"
   },
   {
    "name": "구단·대회·저장",
@@ -34,17 +34,17 @@
   {
    "name": "QA A",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:07:03+09:00"
+   "last_activity_at": "2026-11-25T14:08:44+09:00"
   },
   {
    "name": "QA B",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:07:05+09:00"
+   "state": "대기",
+   "last_activity_at": "2026-11-25T14:09:10+09:00"
   },
   {
    "name": "아트",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:07:14+09:00"
+   "last_activity_at": "2026-11-25T14:10:11+09:00"
   },
   {
    "name": "UI/UX",
@@ -64,7 +64,7 @@
   {
    "name": "레벨",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T14:07:02+09:00"
+   "last_activity_at": "2026-11-25T14:08:01+09:00"
   }
  ]
 }
