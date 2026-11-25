@@ -1,45 +1,45 @@
 {
- "generated_at": "2026-11-25T17:52:15+09:00",
+ "generated_at": "2026-11-25T17:55:15+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:52:13+09:00"
+   "last_activity_at": "2026-11-25T17:55:11+09:00"
   },
   {
    "name": "통합·배포",
-   "state": "대기",
-   "last_activity_at": "2026-11-25T17:51:03+09:00"
+   "state": "작업 중",
+   "last_activity_at": "2026-11-25T17:55:05+09:00"
   },
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:49:26+09:00"
+   "last_activity_at": "2026-11-25T17:54:23+09:00"
   },
   {
    "name": "경기 AI",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:51:01+09:00"
+   "last_activity_at": "2026-11-25T17:55:09+09:00"
   },
   {
    "name": "구단·대회·저장",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:49:11+09:00"
+   "last_activity_at": "2026-11-25T17:53:13+09:00"
   },
   {
    "name": "검증·내러티브 엔진",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:48:54+09:00"
+   "last_activity_at": "2026-11-25T17:54:09+09:00"
   },
   {
    "name": "QA A",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:52:15+09:00"
+   "last_activity_at": "2026-11-25T17:55:05+09:00"
   },
   {
    "name": "QA B",
-   "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:52:11+09:00"
+   "state": "대기",
+   "last_activity_at": "2026-11-25T17:54:55+09:00"
   },
   {
    "name": "아트",
@@ -49,22 +49,22 @@
   {
    "name": "UI/UX",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:50:28+09:00"
+   "last_activity_at": "2026-11-25T17:55:11+09:00"
   },
   {
    "name": "글·현황 문장",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:51:40+09:00"
+   "last_activity_at": "2026-11-25T17:55:13+09:00"
   },
   {
    "name": "UI 소스 작성",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:52:10+09:00"
+   "last_activity_at": "2026-11-25T17:55:15+09:00"
   },
   {
    "name": "레벨",
    "state": "작업 중",
-   "last_activity_at": "2026-11-25T17:52:05+09:00"
+   "last_activity_at": "2026-11-25T17:53:47+09:00"
   }
  ]
 }
