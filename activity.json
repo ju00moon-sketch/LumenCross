@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-26T23:00:12+09:00",
+ "generated_at": "2026-11-26T23:01:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T22:59:28+09:00"
+   "last_activity_at": "2026-11-26T23:00:35+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T22:59:57+09:00"
+   "last_activity_at": "2026-11-26T23:01:11+09:00"
   },
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T22:59:57+09:00"
+   "last_activity_at": "2026-11-26T23:00:25+09:00"
   },
   {
    "name": "경기 AI",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T22:59:08+09:00"
+   "last_activity_at": "2026-11-26T23:00:36+09:00"
   },
   {
    "name": "구단·대회·저장",
@@ -59,7 +59,7 @@
   {
    "name": "UI 소스 작성",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T22:59:53+09:00"
+   "last_activity_at": "2026-11-26T23:01:10+09:00"
   },
   {
    "name": "레벨",
