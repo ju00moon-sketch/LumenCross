@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-27T07:10:12+09:00",
+ "generated_at": "2026-11-27T07:11:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T07:09:19+09:00"
+   "last_activity_at": "2026-11-27T07:10:49+09:00"
   },
   {
    "name": "통합·배포",
-   "state": "대기",
-   "last_activity_at": "2026-11-27T05:18:28+09:00"
+   "state": "작업 중",
+   "last_activity_at": "2026-11-27T07:11:08+09:00"
   },
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T07:09:59+09:00"
+   "last_activity_at": "2026-11-27T07:11:02+09:00"
   },
   {
    "name": "경기 AI",
-   "state": "대기",
-   "last_activity_at": "2026-11-27T04:23:08+09:00"
+   "state": "작업 중",
+   "last_activity_at": "2026-11-27T07:11:08+09:00"
   },
   {
    "name": "구단·대회·저장",
@@ -38,8 +38,8 @@
   },
   {
    "name": "QA B",
-   "state": "대기",
-   "last_activity_at": "2026-11-27T04:58:24+09:00"
+   "state": "작업 중",
+   "last_activity_at": "2026-11-27T07:11:11+09:00"
   },
   {
    "name": "아트",
@@ -59,7 +59,7 @@
   {
    "name": "UI 소스 작성",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T07:10:06+09:00"
+   "last_activity_at": "2026-11-27T07:10:22+09:00"
   },
   {
    "name": "레벨",
