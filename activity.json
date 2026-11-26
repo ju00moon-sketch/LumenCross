@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-26T23:25:12+09:00",
+ "generated_at": "2026-11-26T23:26:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:25:11+09:00"
+   "last_activity_at": "2026-11-26T23:26:00+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:25:08+09:00"
+   "last_activity_at": "2026-11-26T23:26:08+09:00"
   },
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:25:05+09:00"
+   "last_activity_at": "2026-11-26T23:25:54+09:00"
   },
   {
    "name": "경기 AI",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:25:06+09:00"
+   "last_activity_at": "2026-11-26T23:26:07+09:00"
   },
   {
    "name": "구단·대회·저장",
@@ -34,7 +34,7 @@
   {
    "name": "QA A",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:24:39+09:00"
+   "last_activity_at": "2026-11-26T23:25:58+09:00"
   },
   {
    "name": "QA B",
@@ -54,17 +54,17 @@
   {
    "name": "글·현황 문장",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:24:44+09:00"
+   "last_activity_at": "2026-11-26T23:25:59+09:00"
   },
   {
    "name": "UI 소스 작성",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:25:07+09:00"
+   "last_activity_at": "2026-11-26T23:26:08+09:00"
   },
   {
    "name": "레벨",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T23:24:44+09:00"
+   "last_activity_at": "2026-11-26T23:26:04+09:00"
   }
  ]
 }
