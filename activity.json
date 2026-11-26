@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-11-26T21:28:12+09:00",
+ "generated_at": "2026-11-26T21:29:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T21:28:07+09:00"
+   "last_activity_at": "2026-11-26T21:28:56+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T21:28:07+09:00"
+   "last_activity_at": "2026-11-26T21:28:42+09:00"
   },
   {
    "name": "경기 코어",
@@ -34,7 +34,7 @@
   {
    "name": "QA A",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T21:28:10+09:00"
+   "last_activity_at": "2026-11-26T21:28:31+09:00"
   },
   {
    "name": "QA B",
@@ -49,7 +49,7 @@
   {
    "name": "UI/UX",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T21:27:19+09:00"
+   "last_activity_at": "2026-11-26T21:29:10+09:00"
   },
   {
    "name": "글·현황 문장",
