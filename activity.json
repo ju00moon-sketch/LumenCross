@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-11-26T20:34:12+09:00",
+ "generated_at": "2026-11-26T20:35:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T20:32:05+09:00"
+   "last_activity_at": "2026-11-26T20:35:08+09:00"
   },
   {
    "name": "통합·배포",
@@ -49,17 +49,17 @@
   {
    "name": "UI/UX",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T20:31:49+09:00"
+   "last_activity_at": "2026-11-26T20:34:40+09:00"
   },
   {
    "name": "글·현황 문장",
    "state": "작업 중",
-   "last_activity_at": "2026-11-26T20:34:02+09:00"
+   "last_activity_at": "2026-11-26T20:34:55+09:00"
   },
   {
    "name": "UI 소스 작성",
-   "state": "대기",
-   "last_activity_at": "2026-11-26T20:32:46+09:00"
+   "state": "작업 중",
+   "last_activity_at": "2026-11-26T20:35:12+09:00"
   },
   {
    "name": "레벨",
