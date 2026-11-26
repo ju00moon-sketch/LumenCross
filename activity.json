@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-27T04:06:12+09:00",
+ "generated_at": "2026-11-27T04:07:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T04:05:46+09:00"
+   "last_activity_at": "2026-11-27T04:06:53+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T04:05:58+09:00"
+   "last_activity_at": "2026-11-27T04:07:09+09:00"
   },
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T04:05:58+09:00"
+   "last_activity_at": "2026-11-27T04:06:46+09:00"
   },
   {
    "name": "경기 AI",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T04:05:58+09:00"
+   "last_activity_at": "2026-11-27T04:06:51+09:00"
   },
   {
    "name": "구단·대회·저장",
