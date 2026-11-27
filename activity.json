@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-27T16:53:12+09:00",
+ "generated_at": "2026-11-27T16:54:12+09:00",
  "roles": [
   {
    "name": "총괄",
@@ -39,12 +39,12 @@
   {
    "name": "QA B",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T16:53:05+09:00"
+   "last_activity_at": "2026-11-27T16:54:09+09:00"
   },
   {
    "name": "아트",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T16:52:59+09:00"
+   "last_activity_at": "2026-11-27T16:53:41+09:00"
   },
   {
    "name": "UI/UX",
