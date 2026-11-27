@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-11-27T09:18:12+09:00",
+ "generated_at": "2026-11-27T09:19:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T09:16:31+09:00"
+   "last_activity_at": "2026-11-27T09:19:11+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T09:15:23+09:00"
+   "last_activity_at": "2026-11-27T09:19:00+09:00"
   },
   {
    "name": "경기 코어",
@@ -49,17 +49,17 @@
   {
    "name": "UI/UX",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T09:12:07+09:00"
+   "last_activity_at": "2026-11-27T09:18:31+09:00"
   },
   {
    "name": "글·현황 문장",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T09:18:11+09:00"
+   "last_activity_at": "2026-11-27T09:19:07+09:00"
   },
   {
    "name": "UI 소스 작성",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T09:18:12+09:00"
+   "last_activity_at": "2026-11-27T09:18:55+09:00"
   },
   {
    "name": "레벨",
