@@ -1,20 +1,20 @@
 {
- "generated_at": "2026-11-27T12:25:12+09:00",
+ "generated_at": "2026-11-27T12:26:12+09:00",
  "roles": [
   {
    "name": "총괄",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T12:24:39+09:00"
+   "last_activity_at": "2026-11-27T12:26:09+09:00"
   },
   {
    "name": "통합·배포",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T12:24:41+09:00"
+   "last_activity_at": "2026-11-27T12:25:55+09:00"
   },
   {
    "name": "경기 코어",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T12:24:59+09:00"
+   "last_activity_at": "2026-11-27T12:25:54+09:00"
   },
   {
    "name": "경기 AI",
@@ -44,7 +44,7 @@
   {
    "name": "아트",
    "state": "작업 중",
-   "last_activity_at": "2026-11-27T12:24:42+09:00"
+   "last_activity_at": "2026-11-27T12:25:40+09:00"
   },
   {
    "name": "UI/UX",
